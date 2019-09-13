@@ -1,5 +1,5 @@
 import rospy
-from mav_msgs.msg import Actuator
+from mav_msgs.msg import Actuators
 
 
 
@@ -8,8 +8,8 @@ class ActuatorControlTest():
     def __init__(self,
                  ):
 
-        self.message_pub = rospy.Publisher("/firefly/command/motor_speed", Actuator, queue_size=1)
-        self.actuator_control_message = Actuator()
+        self.message_pub = rospy.Publisher("/firefly/command/motor_speed", Actuators, queue_size=1)
+        self.actuator_control_message = Actuators()
 
     def run(self):
 
