@@ -31,11 +31,11 @@ class ActuatorControlTest():
         self.setAngularVelocities(inputs);
 
     def left(self):
-        inputs = [400,400,350,350]
+        inputs = [400,400,390,390]
         self.setAngularVelocities(inputs);
     
     def right(self):
-        inputs = [350,350,400,400]
+        inputs = [390,390,400,400]
         self.setAngularVelocities(inputs);
 
     def run(self):
