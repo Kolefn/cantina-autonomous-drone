@@ -23,19 +23,19 @@ class ActuatorControlTest():
         self.setAngularVelocities(inputs);
 
     def hover(self):
-        inputs = [400, 400, 400, 400]
+        inputs = [490, 490, 490, 490]
         self.setAngularVelocities(inputs);
     
     def down(self):
-        inputs = [200, 200, 200, 200]
+        inputs = [400, 400, 400, 400]
         self.setAngularVelocities(inputs);
 
     def left(self):
-        inputs = [400,400,390,390]
+        inputs = [490,490,480,480]
         self.setAngularVelocities(inputs);
     
     def right(self):
-        inputs = [390,390,400,400]
+        inputs = [490,490,480,480]
         self.setAngularVelocities(inputs);
 
     def run(self):
@@ -51,8 +51,8 @@ class ActuatorControlTest():
             rospy.sleep(1)
             self.left()
             rospy.sleep(1)
-            self.right(1)
-            self.sleep(1)
+            self.right()
+            rospy.sleep(1)
             self.down()
             rospy.sleep(2)
 
