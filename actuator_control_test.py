@@ -5,7 +5,7 @@ from mav_msgs.msg import Actuators
 import os
 
 POSITIVE_LIFT_VEL = 500
-NEUTRAL_LIFT_VEL = 420
+NEUTRAL_LIFT_VEL = 430
 NEGATIVE_LIFT_VEL = NEUTRAL_LIFT_VEL - (POSITIVE_LIFT_VEL - NEUTRAL_LIFT_VEL)
 NEUTRAL_TILT_VEL = NEUTRAL_LIFT_VEL+1
 
@@ -38,7 +38,7 @@ class ActuatorControlTest():
         self.setAngularVelocities(inputs);
     
     def right(self):
-        inputs = [NEUTRAL_TILT_VEL,NEUTRAL_TILT_VEL,NEUTRAL_LIFT_VEL,NEUTRAL_LIFT_VEL]
+        inputs = [NEUTRAL_LIFT_VEL,NEUTRAL_LIFT_VEL,NEUTRAL_TILT_VEL,NEUTRAL_TILT_VEL]
         self.setAngularVelocities(inputs);
 
     def run(self):
