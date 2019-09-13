@@ -16,14 +16,15 @@ class ActuatorControlTest():
 
     def run(self):
 
-
-        while True: 
+            while message_pub.get_num_connections() == 0:
+                rospy.loginfo("Waiting for subscriber to connect")
+                rospy.sleep(1)
+                
             inputs = [0, 0, 0, 0, 0, 0]
 
-            # self.actuator_control_message.angular_velocities = inputs
-            # self.message_pub.publish(self.actuator_control_message)
-            os.system("rostopic pub --once /firefly/command/motor_speed mav_msgs/Actuators '{angular_velocities: [0, 0, 0, 1000, 0, 1000]}'")
-            time.sleep(0.5)
+            self.actuator_control_message.angular_velocities = inputs
+            self.message_pub.publish(self.actuator_control_message)
+            //os.system("rostopic pub --once /firefly/command/motor_speed mav_msgs/Actuators '{angular_velocities: [0, 0, 0, 1000, 0, 1000]}'")
 
 
 
