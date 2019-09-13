@@ -14,7 +14,7 @@ class ActuatorControlTest():
         self.message_pub = rospy.Publisher("/hummingbird/command/motor_speed", Actuators, queue_size=3)
         self.actuator_control_message = Actuators()
     
-    def setAngularVelocities(inputs):
+    def setAngularVelocities(self, inputs):
         self.actuator_control_message.angular_velocities = inputs
         self.message_pub.publish(self.actuator_control_message)
 
