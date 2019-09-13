@@ -19,11 +19,11 @@ class ActuatorControlTest():
         self.message_pub.publish(self.actuator_control_message)
 
     def up(self):
-        inputs = [500, 500, 500, 500]
+        inputs = [400, 400, 400, 400]
         self.setAngularVelocities(inputs);
     
     def down(self):
-        inputs = [100, 100, 100, 100]
+        inputs = [200, 200, 200, 200]
         self.setAngularVelocities(inputs);
 
     def run(self):
@@ -34,7 +34,7 @@ class ActuatorControlTest():
         
         while True:
             self.up()
-            rospy.sleep(2)
+            rospy.sleep(1)
             self.down()
             rospy.sleep(2)
 
