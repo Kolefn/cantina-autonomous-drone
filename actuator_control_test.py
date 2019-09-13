@@ -4,12 +4,13 @@ import rospy
 from mav_msgs.msg import Actuators
 import os
 
+POSITIVE_LIFT_VEL = 500
+NEUTRAL_LIFT_VEL = 450
+NEGATIVE_LIFT_VEL = NEUTRAL_LIFT_VEL - (POSITIVE_LIFT_VEL - NEUTRAL_LIFT_VEL)
+NEUTRAL_TILT_VEL = NEUTRAL_LIFT_VEL+1
 
 class ActuatorControlTest():
-    POSITIVE_LIFT_VEL = 500
-    NEUTRAL_LIFT_VEL = 450
-    NEGATIVE_LIFT_VEL = NEUTRAL_LIFT_VEL - (POSITIVE_LIFT_VEL - NEUTRAL_LIFT_VEL)
-    NEUTRAL_TILT_VEL = NEUTRAL_LIFT_VEL+1
+    
     def __init__(self,
                  ):
 
