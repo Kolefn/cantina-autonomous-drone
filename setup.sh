@@ -29,4 +29,4 @@ catkin build
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
-$ roslaunch rotors_gazebo mav_hovering_example.launch mav_name:=firefly
+$ roslaunch rotors_gazebo mav_hovering_example.launch mav_name:=hummingbird
