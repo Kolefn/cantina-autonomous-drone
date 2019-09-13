@@ -15,6 +15,14 @@ wget https://raw.githubusercontent.com/ethz-asl/rotors_simulator/master/rotors_h
 wstool merge rotors_hil.rosinstall
 wstool update
 
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+sudo python get-pip.py
+sudo pip install future
+sudo apt-get install ros-kinetic-geographic-msgs
+sudo apt-get install libgeographic-dev
+sudo apt-get install geographiclib-tools
+
+
 cd ~/catkin_ws/
 catkin build
 
