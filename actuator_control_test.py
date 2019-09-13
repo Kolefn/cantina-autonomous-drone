@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import rospy
 from mav_msgs.msg import Actuators
 
