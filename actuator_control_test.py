@@ -17,11 +17,11 @@ class ActuatorControlTest():
     def run(self):
 
 
-        inputs = [0, 0, 0, 0, 0, 0]
+        inputs = [0, 0, 500, 500, 0, 0]
 
         # self.actuator_control_message.angular_velocities = inputs
         # self.message_pub.publish(self.actuator_control_message)
-        os.system("rostopic pub --once /firefly/command/motor_speed mav_msgs/Actuators '{angular_velocities: [0, 0, 0, 0, 0, 0]}'")
+        os.system("rostopic pub --once /firefly/command/motor_speed mav_msgs/Actuators '{angular_velocities: [{}, {}, {}, {}, {}, {}]}'".format(inputs[0], inputs[1], inputs[2], inputs[3], inputs[4], inputs[5]))
         time.sleep(10)
 
 
