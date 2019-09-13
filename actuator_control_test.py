@@ -15,7 +15,7 @@ class ActuatorControlTest():
     def run(self):
 
 
-        inputs = [100, 100, 100, 100, 100, 100]
+        inputs = [1000, 1000, 1000, 1000, 1000, 1000]
 
         self.actuator_control_message.angular_velocities = inputs
         self.message_pub.publish(self.actuator_control_message)
