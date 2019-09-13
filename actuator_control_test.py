@@ -47,6 +47,12 @@ class ActuatorControlTest():
         while True:
             self.up()
             rospy.sleep(1)
+            self.hover()
+            rospy.sleep(1)
+            self.left()
+            rospy.sleep(1)
+            self.right(1)
+            self.sleep(1)
             self.down()
             rospy.sleep(2)
 
