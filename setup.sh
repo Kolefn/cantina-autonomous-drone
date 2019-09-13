@@ -21,10 +21,12 @@ sudo pip install future
 sudo apt-get install ros-kinetic-geographic-msgs
 sudo apt-get install libgeographic-dev
 sudo apt-get install geographiclib-tools
-
+sed -i 's/smg.twist_covariance/msg.velocity_covariance/g' ./mavros/mavros_extras/src/plugins/odom.cpp
 
 cd ~/catkin_ws/
 catkin build
 
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
+
+$ roslaunch rotors_gazebo mav_hovering_example.launch mav_name:=firefly
