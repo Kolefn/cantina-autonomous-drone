@@ -21,6 +21,6 @@ class ActuatorControlTest():
 
 
 if __name__ == '__main__':
-    rospy.init_node('actuator_control_test')
+    rospy.init_node('actuator_control_test', anonymous = True)
     act = ActuatorControlTest()
     act.run()
