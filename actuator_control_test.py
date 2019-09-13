@@ -20,7 +20,7 @@ class ActuatorControlTest():
                 rospy.loginfo("Waiting for subscriber to connect")
                 rospy.sleep(1)
             while True:
-                inputs = [0, 0, 0, 0, 0, 0]
+                inputs = [500, 500, 500, 0, 0, 0]
 
                 self.actuator_control_message.angular_velocities = inputs
                 self.message_pub.publish(self.actuator_control_message)
