@@ -16,7 +16,7 @@ class ActuatorControlTest():
 
     def run(self):
 
-            while message_pub.get_num_connections() == 0:
+            while self.message_pub.get_num_connections() == 0:
                 rospy.loginfo("Waiting for subscriber to connect")
                 rospy.sleep(1)
 
