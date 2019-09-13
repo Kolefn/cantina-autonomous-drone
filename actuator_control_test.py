@@ -19,11 +19,23 @@ class ActuatorControlTest():
         self.message_pub.publish(self.actuator_control_message)
 
     def up(self):
+        inputs = [500, 500, 500, 500]
+        self.setAngularVelocities(inputs);
+
+    def hover(self):
         inputs = [400, 400, 400, 400]
         self.setAngularVelocities(inputs);
     
     def down(self):
         inputs = [200, 200, 200, 200]
+        self.setAngularVelocities(inputs);
+
+    def left(self):
+        inputs = [400,400,350,350]
+        self.setAngularVelocities(inputs);
+    
+    def right(self):
+        inputs = [350,350,400,400]
         self.setAngularVelocities(inputs);
 
     def run(self):
