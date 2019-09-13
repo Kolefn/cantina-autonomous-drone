@@ -5,9 +5,11 @@ from mav_msgs.msg import Actuators
 import os
 
 
-
 class ActuatorControlTest():
-
+    POSITIVE_LIFT_VEL = 500
+    NEUTRAL_LIFT_VEL = 450
+    NEGATIVE_LIFT_VEL = NEUTRAL_LIFT_VEL - (POSITIVE_LIFT_VEL - NEUTRAL_LIFT_VEL)
+    NEUTRAL_TILT_VEL = NEUTRAL_LIFT_VEL+1
     def __init__(self,
                  ):
 
@@ -19,23 +21,23 @@ class ActuatorControlTest():
         self.message_pub.publish(self.actuator_control_message)
 
     def up(self):
-        inputs = [500, 500, 500, 500]
+        inputs = [POSITIVE_LIFT_VEL, POSITIVE_LIFT_VEL, POSITIVE_LIFT_VEL, POSITIVE_LIFT_VEL]
         self.setAngularVelocities(inputs);
 
     def hover(self):
-        inputs = [490, 490, 490, 490]
+        inputs = [NEUTRAL_LIFT_VEL, NEUTRAL_LIFT_VEL, NEUTRAL_LIFT_VEL, NEUTRAL_LIFT_VEL]
         self.setAngularVelocities(inputs);
     
     def down(self):
-        inputs = [400, 400, 400, 400]
+        inputs = [NEGATIVE_LIFT_VEL, NEGATIVE_LIFT_VEL, NEGATIVE_LIFT_VEL, NEGATIVE_LIFT_VEL]
         self.setAngularVelocities(inputs);
 
     def left(self):
-        inputs = [490,490,480,480]
+        inputs = [NEUTRAL_TILT_VEL,NEUTRAL_TILT_VEL, NEUTRAL_LIFT_VEL,NEUTRAL_LIFT_VEL]
         self.setAngularVelocities(inputs);
     
     def right(self):
-        inputs = [490,490,480,480]
+        inputs = [NEUTRAL_TILT_VEL,NEUTRAL_TILT_VEL,NEUTRAL_LIFT_VEL,NEUTRAL_LIFT_VEL]
         self.setAngularVelocities(inputs);
 
     def run(self):
