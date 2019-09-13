@@ -1,5 +1,6 @@
 import rospy
-from mav_msgs.msgs import Actuator
+from mav_msgs.msg import Actuator
+
 
 
 class ActuatorControlTest():
