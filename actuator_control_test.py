@@ -1,6 +1,8 @@
 #!/usr/bin/env python
+import time
 import rospy
 from mav_msgs.msg import Actuators
+import os
 
 
 
@@ -15,10 +17,13 @@ class ActuatorControlTest():
     def run(self):
 
 
-        inputs = [1000, 1000, 1000, 1000, 1000, 1000]
+        inputs = [0, 0, 0, 0, 0, 0]
 
-        self.actuator_control_message.angular_velocities = inputs
-        self.message_pub.publish(self.actuator_control_message)
+        # self.actuator_control_message.angular_velocities = inputs
+        # self.message_pub.publish(self.actuator_control_message)
+        os.system("rostopic pub /firefly/command/motor_speed mav_msgs/Actuators '{angular_velocities: {}}'".format(inputs))
+        time.sleep(10)
+
 
 
 if __name__ == '__main__':
