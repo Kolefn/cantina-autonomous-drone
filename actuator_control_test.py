@@ -8,7 +8,7 @@ class ActuatorControlTest():
     def __init__(self,
                  ):
 
-        self.message_pub = rospy.Publisher("/firefly/command/motor_speed", Actuators)
+        self.message_pub = rospy.Publisher("/firefly/command/motor_speed", Actuators, queue_size=1)
         self.actuator_control_message = Actuators()
 
     def run(self):
