@@ -21,7 +21,7 @@ class ActuatorControlTest():
 
         # self.actuator_control_message.angular_velocities = inputs
         # self.message_pub.publish(self.actuator_control_message)
-        os.system("rostopic pub /firefly/command/motor_speed mav_msgs/Actuators '{angular_velocities: 0, 0, 0, 0, 0, 0]}'")
+        os.system("rostopic pub /firefly/command/motor_speed mav_msgs/Actuators '{angular_velocities: [0, 0, 0, 0, 0, 0]}'")
         time.sleep(10)
 
 
