@@ -28,6 +28,7 @@ sudo pip install future
 sudo apt-get install ros-kinetic-geographic-msgs
 sudo apt-get install libgeographic-dev
 sudo apt-get install geographiclib-tools
+sudo apt-get install libignition-math2-dev
 
 cd ~/catkin_ws/src
 sed -i 's/msg.twist_covariance/msg.velocity_covariance/g' ./mavros/mavros_extras/src/plugins/odom.cpp
