@@ -7,6 +7,13 @@ rosdep update
 source /opt/ros/kinetic/setup.bash
 
 
+# upgrade default version of Gazebo that comes with ROS kinetic
+sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install gazebo7 -y
+
+
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
 catkin_init_workspace  # initialize your catkin workspace
