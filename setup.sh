@@ -23,7 +23,7 @@ sudo apt-get install libgeographic-dev
 sudo apt-get install geographiclib-tools
 
 cd ~/catkin_ws/src
-sed -i 's/smg.twist_covariance/msg.velocity_covariance/g' ./mavros/mavros_extras/src/plugins/odom.cpp
+sed -i 's/msg.twist_covariance/msg.velocity_covariance/g' ./mavros/mavros_extras/src/plugins/odom.cpp
 
 cd ..
 catkin build
