@@ -29,4 +29,4 @@ catkin build
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
-$ roslaunch mav_with_camera.launch mav_name:=hummingbird
+roslaunch mav_with_camera.launch mav_name:=hummingbird
