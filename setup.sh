@@ -21,9 +21,11 @@ sudo pip install future
 sudo apt-get install ros-kinetic-geographic-msgs
 sudo apt-get install libgeographic-dev
 sudo apt-get install geographiclib-tools
+
+cd ~/catkin_ws/src
 sed -i 's/smg.twist_covariance/msg.velocity_covariance/g' ./mavros/mavros_extras/src/plugins/odom.cpp
 
-cd ~/catkin_ws/
+cd ..
 catkin build
 
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
