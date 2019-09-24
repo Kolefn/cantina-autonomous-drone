@@ -1,7 +1,7 @@
 
 <launch>
   <arg name="mav_name" default="hummingbird"/>
-  <arg name="world_name" default="static_red_cube.world"/>
+  <arg name="world_name" default="static_red_cube"/>
   <arg name="enable_logging" default="false" />
   <arg name="enable_ground_truth" default="true" />
   <arg name="log_file" default="$(arg mav_name)" />
