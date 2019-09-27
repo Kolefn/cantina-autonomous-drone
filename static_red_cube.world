@@ -9,29 +9,26 @@
     <include>
       <uri>model://sun</uri>
     </include>
-    <model name="red_cube">
-      <static>true</static>
-      <pose>1 1 1 0 0 0</pose>
-      <link name="link">
-        <collision name="collision">
-          <geometry>
-            <box>
-              <size>1 1 1 1</size>
-            </box>
-          </geometry>
-        </collision>
-        <visual name="visual">
-          <geometry>
-            <box>
-              <size>1 1 1 1</size>
-            </box>
-          </geometry>
-          <material>
-            <script>Gazebo/Red</script>
-        </material>
-        </visual>
-      </link>
-    </model>
+    <model:physical name="box_model">
+        <xyz>0 1.5 0.5</xyz>
+        <rpy>0.0 0.0 0.0</rpy>
+        <canonicalBody>box1_body</canonicalBody>
+        <static>false</static>
+
+        <body:box name="box_body">
+            <xyz>0.0 0.0 0.0</xyz>
+            <rpy>0.0 0.0 0.0</rpy>
+
+            <geom:box name="box_geom">
+            <xyz>0.0 0.0 0.0</xyz>
+            <rpy>0.0 0.0 0.0</rpy>
+            <mesh>default</mesh>
+            <size>1 1 1</size>
+            <density>1.0</density>
+            <material>Gazebo/Red</material>
+            </geom:box>
+        </body:box>
+    </model:physical>
     <physics type='ode'>
       <ode>
         <solver>
