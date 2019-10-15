@@ -38,6 +38,7 @@ cd ..
 catkin build
 
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:`dirname "$0"`" >> ~/.bashrc
 source ~/.bashrc
 
 # roslaunch mav_with_camera.launch mav_name:=hummingbird
