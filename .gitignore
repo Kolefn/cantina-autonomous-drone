@@ -32,3 +32,5 @@
 *.app
 
 simulation/build
+
+.DS_Store
