@@ -34,7 +34,7 @@ sudo apt-get install libignition-math2-dev
 cd ~/catkin_ws/src
 sed -i 's/msg.twist_covariance/msg.velocity_covariance/g' ./mavros/mavros_extras/src/plugins/odom.cpp
 
-cd ..
+cd ~/catkin_ws/
 catkin build
 
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
