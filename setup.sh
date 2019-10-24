@@ -43,7 +43,9 @@ source /opt/ros/kinetic/setup.bash
 sudo rosdep fix-permissions
 
 mkdir ~/.gazebo/models
-cp -r ./red_square ~/.gazebo/models
+mkdir ~/.gazebo/worlds
+cp ./static_red_square.world ~/catkin/src/rotors_simulator/rotors_gazebo/worlds/
+cp -r ./red_square ~/catkin/src/rotors_simulator/rotors_gazebo/models/
 
 
 
