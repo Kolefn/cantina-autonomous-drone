@@ -11,7 +11,7 @@
     </include>
     <include>
       <uri>model://red_square</uri>
-      <pose>2 0 0.25 0 -80 0 </pose>
+      <pose>2 0 0.25 0 80 0 </pose>
     </include>
     <physics type='ode'>
       <ode>
