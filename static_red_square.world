@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
-  <world name="static_red_cube">
+  <world name="static_red_square">
     <!-- A ground plane -->
     <include>
       <uri>model://ground_plane</uri>
@@ -10,7 +10,7 @@
       <uri>model://sun</uri>
     </include>
     <include>
-      <uri>model://red_cube</uri>
+      <uri>model://red_square</uri>
     </include>
     <physics type='ode'>
       <ode>

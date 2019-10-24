@@ -38,9 +38,13 @@ cd ~/catkin_ws/
 catkin build
 
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
-echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:`dirname "$0"`" >> ~/.bashrc
 source ~/.bashrc
-
 source /opt/ros/kinetic/setup.bash
+sudo rosdep fix-permissions
+
+mkdir ~/.gazebo/models
+cp -r ./red_square ~/.gazebo/models
+
+
 
 # roslaunch mav_with_camera.launch mav_name:=hummingbird
