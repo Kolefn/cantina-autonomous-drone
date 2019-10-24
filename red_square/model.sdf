@@ -6,7 +6,7 @@
       <collision name="collision">
         <geometry>
           <plane>
-            <normal>0 0 1</normal>
+            <normal>1 1 1</normal>
             <size>0.25 0.25</size>
           </plane>
         </geometry>
@@ -23,7 +23,7 @@
         <cast_shadows>false</cast_shadows>
         <geometry>
           <plane>
-            <normal>0 0 1</normal>
+            <normal>1 1 1</normal>
             <size>0.25 0.25</size>
           </plane>
         </geometry>
