@@ -35,6 +35,6 @@
     enable_visual="true">
 
       <box size="0.03 0.03 0.01" />
-      <origin xyz="0.0 0.0 -0.08" rpy="0.0 0.1 2.4" />
+      <origin xyz="0.0 0.0 -0.08" rpy="0.0 0.1 2.3" />
   </xacro:camera_macro>
 </robot>
