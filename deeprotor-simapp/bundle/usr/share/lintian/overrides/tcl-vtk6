@@ -1,0 +1,3 @@
+# Upstream does not provide manpages
+tcl-vtk6: binary-without-manpage
+tcl-vtk6: hardening-no-relro

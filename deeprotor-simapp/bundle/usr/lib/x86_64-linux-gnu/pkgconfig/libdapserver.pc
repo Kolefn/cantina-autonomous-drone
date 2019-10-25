@@ -1,0 +1,14 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib/x86_64-linux-gnu
+includedir=${prefix}/include
+ccompiler=gcc
+cppcompiler=g++
+
+Name: libdapserver
+Description: Server side of the OPeNDAP C++ implementation of the Data Access Protocol
+Version: 3.15.1
+Requires: libdap
+Libs: -L${libdir} -ldapserver
+Cflags: -I${includedir}/libdap
+

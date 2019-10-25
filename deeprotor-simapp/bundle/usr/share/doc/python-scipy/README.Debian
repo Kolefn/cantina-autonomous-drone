@@ -1,0 +1,21 @@
+Note about scipy.pilutil:
+-------------------------
+
+This scipy version provides "see" (from mime-support) as default
+viewer, instead of another hard-coded image viewer. This allows one
+to ensure that images can be always displayed. Additionally, it is
+possible to customize the image viewer by setting the environment
+variable SCIPY_PIL_IMAGE_VIEWER.
+
+Note about scipy.xplt on hppa, s390, ia64, mips, mipsel
+-------------------------------------------------------
+
+This package does not build on the archs mentionned above, because the
+configuration does not know how to handle fpu exceptions for these
+processors. If you want to test fixes to contribute a patch, edit
+debian/setup_without_xplt.py in the source package.
+
+The other plotting modules are available, though.
+
+ -- Marco Presi (Zufus) <zufus@debian.org>, Tue, 20 Feb 2007 23:29:18 +0000
+

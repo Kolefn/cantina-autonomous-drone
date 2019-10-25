@@ -1,0 +1,12 @@
+prefix=/opt/workspace/AwsSilverstoneSimulationApplication/build/private/tmp/colcon/bundle/cache/bundle_staging/usr
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib
+
+Name: aws-cpp-sdk-core
+Description: Core http and utility library for the AWS C++ SDK
+Version: 1.4.90
+Cflags: -I${includedir} -fno-exceptions -std=c++11 -s
+Libs: -L${libdir} -laws-cpp-sdk-core 
+Libs.private: -lpthread -lcurl -lcrypto -lssl -lz
+Requires: 

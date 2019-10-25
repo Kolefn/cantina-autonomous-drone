@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib/x86_64-linux-gnu
+includedir=/usr/include/mircore
+
+Name: mircore
+Description: Mir core library
+Version: 0.26.3
+Libs: -L${libdir} -lmircore
+Cflags: -I${includedir}

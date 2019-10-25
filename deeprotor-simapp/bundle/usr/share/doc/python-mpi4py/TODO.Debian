@@ -1,0 +1,63 @@
+* TESTS
+** Failed initially
+   dh_auto_test
+	make -j1 test
+make[1]: Entering directory `/home/yoh/deb/gits/pkg-exppsy/mpi4py'
+python /home/yoh/deb/gits/pkg-exppsy/mpi4py/test/runalltest.py < /dev/null
+
+...
+Running test_environ
+..........--------------------------------------------------------------------------
+mpiexec was unable to launch the specified application as it could not find an executable:
+
+Executable: -pmi_args
+Node: novo
+
+while attempting to start process rank 0.
+
+
+is due to
+
+ univsz = MPI.COMM_WORLD.Get_attr(MPI.UNIVERSE_SIZE)
+
+in testUniverseSize
+
+That all was with mpich, building/running with openmpi does not fail
+on those
+
+** DONE UPSTREAM: exit runalltest.py with non-0 exit code -- using nose and next release will do
+   CLOSED: [2011-04-06 Wed 15:04]
+** DONE Failed unittests (on current trunk and release 1.2.2): -- skipped upon upstream recommendation -- need more recent openmpi
+   CLOSED: [2011-04-06 Wed 15:04]
+
+======================================================================
+FAIL: testFreePredefined (test_exceptions.TestExcDatatype)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/yoh/deb/gits/pkg-exppsy/mpi4py/test/test_exceptions.py", line 36, in testFreePredefined
+    self.assertRaisesMPI(self.ERR_TYPE, dtype.Free)
+  File "/home/yoh/deb/gits/pkg-exppsy/mpi4py/test/mpiunittest.py", line 30, in assertRaisesMPI
+    IErrClassName,  IErrClass,)
+AssertionError: generated error class is 'ERR_TYPE' (3), but expected 'ERR_INTERN' (17)
+
+======================================================================
+FAIL: testPackUnpackExternal (test_pack.TestPackExternal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/yoh/deb/gits/pkg-exppsy/mpi4py/test/test_pack.py", line 95, in testPackUnpackExternal
+    self.assertTrue(equal(iarray2, oarray2))
+AssertionError
+
+* Building
+** Doesn't build-depends on Cython atm as recommended by upstream (also Cython upstream)
+
+rebuilt ones (upstream generated with cython 0.13) would be
+
+ src/include/mpi4py/mpi4py.MPI.h     |   34 +-
+ src/include/mpi4py/mpi4py.MPI_api.h |    6 +-
+ src/mpi4py.MPE.c                    | 1075 ++-
+ src/mpi4py.MPI.c                    |16900 +++++++++++++++++++----------------
+
+* Documentation
+** Upstream:
+*** "mod:pickle/cPickle modules" doesn't render nicely ;)

@@ -1,0 +1,9 @@
+# Upstream has renamed the namespace. Full upstream answer is at:
+# https://github.com/simbody/simbody/issues/49#issuecomment-39047672 
+libsimbody3.5v5: embedded-library usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.5: tinyxml
+
+# Upstream thinks that makes no sense to package libraries independently
+# https://github.com/simbody/simbody/issues/49#issuecomment-27418566
+libsimbody3.5v5: package-name-doesnt-match-sonames libSimTKcommon3.5 libSimTKmath3.5 libSimTKsimbody3.5
+# G++5 ABI transition
+libsimbody3.5v5: package-name-doesnt-match-sonames libsimbody3.5

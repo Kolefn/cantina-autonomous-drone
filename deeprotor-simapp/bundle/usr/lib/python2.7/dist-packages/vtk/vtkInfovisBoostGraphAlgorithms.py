@@ -1,0 +1,1 @@
+from vtkInfovisBoostGraphAlgorithmsPython import *

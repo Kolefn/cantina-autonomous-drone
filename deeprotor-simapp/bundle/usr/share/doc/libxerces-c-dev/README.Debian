@@ -1,0 +1,18 @@
+
+Any given debian release may contain one xerces-c package for each
+major version of xerces-c.  It is expected that most releases will
+have only a single version of xerces-c since major releases are rare.
+
+The package "libxerces-c-dev" is always the development package for
+the latest major version.  You may also use libxerces-cn-dev, where n
+is the major version, to get the development package for the specific
+major version.  For example, libxerces-c3-dev would be the development
+packages for the latest 3.x release, and libxerces-c2-dev would be the
+development packages for the latest 2.x release.
+
+If your package uses on xerces-c, you should generally declare a build
+dependency on libxerces-c-dev.  You should only use a specific version
+of the dev package if it is specifically known that your package will
+not work (yet) with a new version of xerces-c when it comes out.
+
+ -- Jay Berkenbilt <qjb@debian.org>, Sat, 22 Mar 2008 13:58:45 -0400

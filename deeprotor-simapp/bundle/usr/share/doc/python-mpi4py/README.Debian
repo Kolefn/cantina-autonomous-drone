@@ -1,0 +1,5 @@
+ATM (as of 1.3.x series) Debian package follows "bleeding" edge
+development of MPI4Py, and not its stable bugfix branch (release-1.3).
+For this purpose .orig.tar.gz are generated directly from the HG
+repository.
+

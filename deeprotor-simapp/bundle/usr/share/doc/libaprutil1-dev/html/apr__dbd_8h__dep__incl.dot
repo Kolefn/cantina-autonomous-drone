@@ -1,0 +1,8 @@
+digraph "/build/apr-util-C3yni0/apr-util-1.5.4/include/apr_dbd.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="/build/apr-util-C3yni0\l/apr-util-1.5.4/include\l/apr_dbd.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="/build/apr-util-C3yni0\l/apr-util-1.5.4/include\l/private/apr_dbd_internal.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$apr__dbd__internal_8h_source.html"];
+}

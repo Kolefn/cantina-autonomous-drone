@@ -1,0 +1,14 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib/x86_64-linux-gnu
+includedir=${prefix}/include/x86_64-linux-gnu/qt5
+
+
+Name: Qt5 DesignerComponents
+Description: Qt DesignerComponents module
+Version: 5.5.1
+Libs: -lQt5DesignerComponents 
+Libs.private:  -lQt5Designer -L/usr/X11R6/lib64 -lQt5Widgets -lQt5Gui -lQt5Xml -lQt5Core -lpthread -lQt5Xml -lQt5Core -lpthread -lGL  
+Cflags: -I${includedir}/QtDesignerComponents -I${includedir}
+Requires: Qt5Core Qt5Gui Qt5Widgets Qt5Designer
+

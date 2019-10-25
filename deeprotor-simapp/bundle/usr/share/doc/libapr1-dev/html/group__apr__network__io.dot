@@ -1,0 +1,15 @@
+digraph "Network Routines"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node3 [label="IP Protocol Definitions\l for use when creating\l sockets",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___i_p___proto.html"];
+  Node2 [label="Socket option definitions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__apr__sockopt.html"];
+  Node4 [label="IP Multicast",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group__apr__mcast.html"];
+  Node1 [label="Apache Portability\l Runtime library",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___a_p_r.html"];
+  Node0 [label="Network Routines",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1->Node0 [shape=plaintext, dir="back", style="solid"];
+  Node0->Node2 [shape=plaintext, dir="back", style="solid"];
+  Node0->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node0->Node4 [shape=plaintext, dir="back", style="solid"];
+}

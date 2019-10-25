@@ -1,0 +1,15 @@
+digraph "Error Codes"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node4 [label="Status Value Tests",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___a_p_r___s_t_a_t_u_s___i_s.html"];
+  Node3 [label="APR Error Values",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___a_p_r___error.html"];
+  Node0 [label="Error Codes",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 [label="Apache Portability\l Runtime library",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___a_p_r.html"];
+  Node2 [label="APR Error Space",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$group___a_p_r___e_r_r_o_r__map.html"];
+  Node1->Node0 [shape=plaintext, dir="back", style="solid"];
+  Node0->Node2 [shape=plaintext, dir="back", style="solid"];
+  Node0->Node3 [shape=plaintext, dir="back", style="solid"];
+  Node0->Node4 [shape=plaintext, dir="back", style="solid"];
+}

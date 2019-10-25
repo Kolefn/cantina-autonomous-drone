@@ -1,0 +1,1 @@
+from vtkIOMPIParallelPython import *

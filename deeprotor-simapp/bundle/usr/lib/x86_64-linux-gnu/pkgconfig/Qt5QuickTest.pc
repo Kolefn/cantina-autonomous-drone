@@ -1,0 +1,14 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib/x86_64-linux-gnu
+includedir=${prefix}/include/x86_64-linux-gnu/qt5
+
+
+Name: Qt5 QuickTest
+Description: Qt QuickTest module
+Version: 5.5.1
+Libs: -lQt5QuickTest 
+Libs.private: -lQt5Widgets -L/usr/X11R6/lib64 -lQt5Gui -lQt5Core -lpthread  -lQt5Quick -lQt5Qml -lQt5Test -lQt5Gui -lQt5Network -lQt5Core -lpthread -lGL  
+Cflags: -I${includedir}/QtQuickTest -I${includedir}
+Requires: Qt5Core Qt5Widgets
+

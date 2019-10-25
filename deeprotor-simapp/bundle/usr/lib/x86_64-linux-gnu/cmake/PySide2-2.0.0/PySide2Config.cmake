@@ -1,0 +1,5 @@
+if (NOT PYTHON_BASENAME)
+    message(STATUS "PySide2Config: Using default python: .cpython-35m-x86_64-linux-gnu")
+    SET(PYTHON_BASENAME .cpython-35m-x86_64-linux-gnu)
+endif()
+include(/usr/lib/x86_64-linux-gnu/cmake/PySide2-2.0.0/PySide2Config${PYTHON_BASENAME}.cmake)

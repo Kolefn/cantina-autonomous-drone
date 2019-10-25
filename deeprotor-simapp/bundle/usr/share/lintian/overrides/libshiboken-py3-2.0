@@ -1,0 +1,4 @@
+# We ship compiled versions for each supported python3 version, with a symlink to the default version
+package-name-doesnt-match-sonames
+# G++5 ABI transition
+libshiboken-py3-1.2v5: package-name-doesnt-match-sonames libshiboken-py3-1.2

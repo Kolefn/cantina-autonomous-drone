@@ -1,0 +1,35 @@
+# NetCDF C Configuration Summary
+==============================
+
+# General
+-------
+NetCDF Version:		4.4.0
+Configured On:		Tue Mar 29 11:41:27 UTC 2016
+Host System:		x86_64-Linux-3.13.0-83-generic
+Build Directory: 	/build/netcdf-StLR0y/netcdf-4.4.0/obj-x86_64-linux-gnu
+Install Prefix:         /usr
+
+# Compiling Options
+-----------------
+C Compiler:		/usr/bin/x86_64-linux-gnu-gcc
+CFLAGS:			-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2  
+CPPFLAGS:		 
+LDFLAGS:		 -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now 
+AM_CFLAGS:		
+AM_CPPFLAGS:		
+AM_LDFLAGS:		
+Shared Library:		yes
+Static Library:		no
+Extra libraries:	-lhdf5_hl -lhdf5 -lpthread -lsz -lz -ldl -lm -lcurl
+
+# Features
+--------
+NetCDF-2 API:		yes
+HDF4 Support:		no
+NetCDF-4 API:		yes
+NC-4 Parallel Support:	no
+PNetCDF Support:	no
+DAP Support:		yes
+Diskless Support:	yes
+MMap Support:		no
+JNA Support:		no

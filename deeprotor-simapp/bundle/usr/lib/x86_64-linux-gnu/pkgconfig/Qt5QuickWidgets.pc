@@ -1,0 +1,14 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib/x86_64-linux-gnu
+includedir=${prefix}/include/x86_64-linux-gnu/qt5
+
+
+Name: Qt5 QuickWidgets
+Description: Qt QuickWidgets module
+Version: 5.5.1
+Libs: -lQt5QuickWidgets 
+Libs.private:  -lQt5Quick -lQt5Qml -lQt5Widgets -L/usr/X11R6/lib64 -lQt5Gui -lQt5Network -lQt5Core -lpthread -lGL  
+Cflags: -I${includedir}/QtQuickWidgets -I${includedir}
+Requires: Qt5Core Qt5Gui Qt5Qml Qt5Quick Qt5Widgets
+

@@ -1,0 +1,6 @@
+# Build uses -D_FORTIFY_SOURCE=2, but hardening-check reports:
+#  Fortify Source functions: no, only unprotected functions found!
+#         unprotected: strcpy
+#         unprotected: strncpy
+#         unprotected: memcpy
+libnetcdf-c++4: hardening-no-fortify-functions *

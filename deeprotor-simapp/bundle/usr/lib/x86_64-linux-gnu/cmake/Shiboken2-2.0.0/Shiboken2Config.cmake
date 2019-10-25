@@ -1,0 +1,5 @@
+if (NOT PYTHON_EXTENSION_SUFFIX)
+    message(STATUS "Shiboken2Config: Using default python: .cpython-35m-x86_64-linux-gnu")
+    SET(PYTHON_EXTENSION_SUFFIX .cpython-35m-x86_64-linux-gnu)
+endif()
+include(/usr/lib/x86_64-linux-gnu/cmake/Shiboken2-2.0.0/Shiboken2Config${PYTHON_EXTENSION_SUFFIX}.cmake)
