@@ -3,7 +3,7 @@
 """This code is taken from
    https://github.com/scipy/scipy/blob/master/scipy/spatial/transform/rotation.py
    because there is no python 3 implementation This is a stripped down version
-   intended to be used by deepracer only.
+   intended to be used by deeprotor only.
 """
 import re
 import numpy as np
