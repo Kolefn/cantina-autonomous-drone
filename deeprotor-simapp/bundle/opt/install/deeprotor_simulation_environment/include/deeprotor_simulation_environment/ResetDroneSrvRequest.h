@@ -24,22 +24,27 @@ struct ResetDroneSrvRequest_
   typedef ResetDroneSrvRequest_<ContainerAllocator> Type;
 
   ResetDroneSrvRequest_()
-    : ndist(0.0)
-    , next_index(0)  {
+    : x(0.0)
+    , y(0.0)
+    , z(0.0)  {
     }
   ResetDroneSrvRequest_(const ContainerAllocator& _alloc)
-    : ndist(0.0)
-    , next_index(0)  {
+    : x(0.0)
+    , y(0.0)
+    , z(0.0)  {
   (void)_alloc;
     }
 
 
 
-   typedef float _ndist_type;
-  _ndist_type ndist;
+   typedef float _x_type;
+  _x_type x;
 
-   typedef int32_t _next_index_type;
-  _next_index_type next_index;
+   typedef float _y_type;
+  _y_type y;
+
+   typedef float _z_type;
+  _z_type z;
 
 
 
@@ -143,7 +148,10 @@ struct Definition< ::deeprotor_simulation_environment::ResetDroneSrvRequest_<Con
 {
   static const char* value()
   {
-    return "";
+    return "float32 x\n\
+float32 y\n\
+float32 z\n\
+";
   }
 
   static const char* value(const ::deeprotor_simulation_environment::ResetDroneSrvRequest_<ContainerAllocator>&) { return value(); }
@@ -161,7 +169,9 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-
+      stream.next(m.x);
+      stream.next(m.y);
+      stream.next(m.z;
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -180,7 +190,12 @@ struct Printer< ::deeprotor_simulation_environment::ResetDroneSrvRequest_<Contai
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::deeprotor_simulation_environment::ResetDroneSrvRequest_<ContainerAllocator>& v)
   {
-
+    s << indent << "x: ";
+    Printer<float>::stream(s, indent + "  ", v.x);
+    s << indent << "y: ";
+    Printer<float>::stream(s, indent + "  ", v.y);
+    s << indent << "z: ";
+    Printer<float>::stream(s, indent + "  ", v.z);
   }
 };
 

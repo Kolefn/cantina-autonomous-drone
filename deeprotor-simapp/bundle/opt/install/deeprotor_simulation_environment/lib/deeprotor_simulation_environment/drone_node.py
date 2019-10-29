@@ -57,21 +57,20 @@ class DeepRotor(object):
         # Gazebo service that allows us to position the drone
         self.model_state_client = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
         # Place the drone at the starting point facing the forward direction
-        self.reset_drone(0, 1)
+        self.reset_drone(0, 0, 0)
 
-    def reset_drone(self):
+    def reset_drone(self, x, y, z):
         ''' Reset's the drone
         '''
 
-        start_yaw = 0
-        start_quaternion = Rotation.from_euler('zyx', [start_yaw, 0, 0]).as_quat()
+        start_quaternion = Rotation.from_euler('zyx', [0, 0, 0]).as_quat()
 
         # Construct the model state and send to Gazebo
         model_state = ModelState()
         model_state.model_name = 'drone'
-        model_state.pose.position.x = 0
-        model_state.pose.position.y = 0
-        model_state.pose.position.z = 0
+        model_state.pose.position.x = x
+        model_state.pose.position.y = y
+        model_state.pose.position.z = z
         model_state.pose.orientation.x = start_quaternion[0]
         model_state.pose.orientation.y = start_quaternion[1]
         model_state.pose.orientation.z = start_quaternion[2]
@@ -86,9 +85,9 @@ class DeepRotor(object):
 
     def handle_reset_drone(self, req):
         '''Request handler for resetting the drone
-           req - Request from the client, not used yet
+           req - Request from the client, should contain x,y,z
         '''
-        self.reset_drone()
+        self.reset_drone(req.x, req.y, req.z)
         return ResetDroneSrvResponse(1)
 
 if __name__ == '__main__':
