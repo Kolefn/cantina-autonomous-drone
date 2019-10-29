@@ -27,7 +27,7 @@ def evaluation_worker(graph_manager, number_of_trials, local_model_directory):
     graph_manager.create_graph(task_parameters)
 
     try:
-        # This will only work for DeepRacerRacetrackEnv enviroments
+        # This will only work for DeepRotorEnv enviroments
         graph_manager.top_level_manager.environment.env.env.set_allow_servo_step_signals(True)
     except Exception as ex:
         print("[ERROR] Method not defined in enviroment class: {}".format(ex))
