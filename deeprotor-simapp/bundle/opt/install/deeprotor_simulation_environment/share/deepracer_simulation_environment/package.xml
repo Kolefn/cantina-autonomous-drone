@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package format="1">
-  <name>deepracer_simulation_environment</name>
+  <name>deeprotor_simulation_environment</name>
   <version>1.0.0</version>
-  <description>The AWS DeepRacer simulation environment package</description>
-  <maintainer email="aws-deepracer@amazon.com">AWS DeepRacer</maintainer>
+  <description>DeepRotor based on the AWS DeepRacer simulation environment package</description>
+  <maintainer email="kole@cantina.co">DeepRotor</maintainer>
   <license>Apache2.0</license>
 
   <buildtool_depend>catkin</buildtool_depend>

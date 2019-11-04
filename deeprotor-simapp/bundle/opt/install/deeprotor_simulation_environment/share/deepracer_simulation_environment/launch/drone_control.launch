@@ -1,0 +1,5 @@
+<?xml version='1.0'?>
+
+<launch>
+  <node pkg="deeprotor_simulation_environment" type="drone_node.py" name="drone_reset_node" output="screen"></node>
+</launch>

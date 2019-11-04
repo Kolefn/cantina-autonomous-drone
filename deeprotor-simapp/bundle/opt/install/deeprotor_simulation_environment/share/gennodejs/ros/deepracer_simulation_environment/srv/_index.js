@@ -1,10 +1,8 @@
 
 "use strict";
 
-let GetWaypointSrv = require('./GetWaypointSrv.js')
-let ResetCarSrv = require('./ResetCarSrv.js')
+let ResetDroneSrv = require('./ResetDroneSrv.js')
 
 module.exports = {
-  GetWaypointSrv: GetWaypointSrv,
-  ResetCarSrv: ResetCarSrv,
+  ResetDroneSrv: ResetDroneSrv,
 };
