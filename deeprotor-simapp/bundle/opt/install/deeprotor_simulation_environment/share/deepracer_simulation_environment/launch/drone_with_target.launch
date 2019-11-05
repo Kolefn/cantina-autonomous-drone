@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="world_name"/>
+  <arg name="world_name" default="$(find deeprotor_simulation_environment)/worlds/static_red_square_target.world"/>
   <arg name="kinesis_video_stream_name" />
   <arg name="kinesis_video_stream_region" default="us-east-1" />
 

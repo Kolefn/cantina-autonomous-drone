@@ -10,11 +10,15 @@
     <arg name="gui" value="$(arg gui)"/>
   </include>
 
-  <!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
-  <param name="robot_description" command="$(find xacro)/xacro '$(find deeprotor_simulation_environment)/urdf/drone.xacro'" />
-
-  <!-- push robot_description to factory and spawn robot in gazebo -->
-  <node name="drone_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model drone -z 0.05" />
+  <group ns="drone">
+    <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
+      <arg name="namespace" default="drone"/>
+      <arg name="mav_name" value="hummingbird" />
+      <arg name="model" value="$(find deeprotor_simulation_environment)/urdf/drone.xacro" />
+    </include>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  </group>
 
   <!-- ros_control drone launch file -->
   <include file="$(find deeprotor_simulation_environment)/launch/drone_control.launch" ns="/"/>
