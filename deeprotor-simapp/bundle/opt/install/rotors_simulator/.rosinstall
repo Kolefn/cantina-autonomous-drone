@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/kole/rotors_simulator_ws/install/src/setup.sh

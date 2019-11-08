@@ -1,0 +1,8 @@
+prefix=/home/kole/rotors_simulator_ws/install/src
+
+Name: mav_state_machine_msgs
+Description: Description of mav_state_machine_msgs
+Version: 0.0.0
+Cflags: -I/home/kole/rotors_simulator_ws/install/src/include
+Libs: -L/home/kole/rotors_simulator_ws/install/src/lib 
+Requires: message_runtime

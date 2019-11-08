@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: rqt_rotors
+Version: 2.2.3
+Summary: The rqt_rotors package
+Home-page: https://github.com/ethz-asl/rotors_simulator
+Author: Pavel Vechersky <pavelv@student.ethz.ch>, Timo Hinzmann <timo.hinzmann@gmail.com>
+Author-email: UNKNOWN
+License: ASL 2.0
+Description: UNKNOWN
+Platform: UNKNOWN

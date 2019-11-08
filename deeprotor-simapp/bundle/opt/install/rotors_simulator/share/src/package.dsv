@@ -1,0 +1,9 @@
+source;share/src/hook/cmake_prefix_path.ps1
+source;share/src/hook/cmake_prefix_path.dsv
+source;share/src/hook/cmake_prefix_path.sh
+source;share/src/hook/ld_library_path_lib.ps1
+source;share/src/hook/ld_library_path_lib.dsv
+source;share/src/hook/ld_library_path_lib.sh
+source;share/src/hook/path.ps1
+source;share/src/hook/path.dsv
+source;share/src/hook/path.sh
