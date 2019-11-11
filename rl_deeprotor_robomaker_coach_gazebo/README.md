@@ -1,6 +1,6 @@
 # DeepRotor notebook using Amazon SageMaker RL and AWS RoboMaker services
 
-This folder contains examples of how to use RL to train an autonomous drone. This is a based off the the AWS DeepRacer code found at [https://github.com/awslabs/amazon-sagemaker-examples/tree/master/reinforcement_learning/rl_deepracer_robomaker_coach_gazebo](rl_deepracer_robomaker_coach_gazebo). This gives a glimse of architecture used to get the DeepRotor working.
+This folder contains examples of how to use RL to train an autonomous drone. This is a based on the the AWS DeepRacer code found at [rl_deepracer_robomaker_coach_gazebo](https://github.com/awslabs/amazon-sagemaker-examples/tree/master/reinforcement_learning/rl_deepracer_robomaker_coach_gazebo). This gives a glimse of architecture used to get the DeepRotor working.
 
 
 ## Contents
@@ -14,7 +14,7 @@ This folder contains examples of how to use RL to train an autonomous drone. Thi
   * `markov/`: Helper files for S3 upload/download
    * `presets/default.py`: Preset (configuration) for DeepRotor
    * `rewards/default.py`: Custom reward function
-   * `environments/deeprotor_racetrack_env.py`: Gym environment file for DeepRotor
+   * `environments/deeprotor_env.py`: Gym environment file for DeepRotor
   * `lib/`: redis configuration file and ppo_head.py customized tensorflow file copied to sagemaker container.
 
 * `common/`: helper function to build docker files.
