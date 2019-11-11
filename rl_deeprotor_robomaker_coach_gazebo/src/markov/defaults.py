@@ -1,64 +1,36 @@
+import math
+
 # Default max number of steps to allow per episode
 MAX_STEPS = 10000
 # Default enviroment
-ENV_ID = 'DeepRacerRacetrackCustomActionSpaceEnv-v0'
+ENV_ID = 'DeepRotorEnv-v0'
 # Entry point for default enviroment
-ENTRY_POINT = 'markov.environments.deepracer_racetrack_env:DeepRacerRacetrackCustomActionSpaceEnv'
+ENTRY_POINT = 'markov.environments.deeprotor_env:DeepRotorEnv'
 # Default reward threshold
 THRESHOLD = 200
-
-"""
-Default action space from re:Invent (6 actions).
-"""
-model_metadata = {
-    "action_space": [
-        {
-            "steering_angle": 45,
-            "speed": 0.8
-        },
-        {
-            "steering_angle": -45,
-            "speed": 0.8
-        },
-        {
-            "steering_angle": 0,
-            "speed": 0.8
-        },
-        {
-            "steering_angle": 22.5,
-            "speed": 0.8
-        },
-        {
-            "steering_angle": -22.5,
-            "speed": 0.8
-        },
-        {
-            "steering_angle": 0,
-            "speed": 0.4
-        }
-    ]
-}
 
 """
 Default reward function is the centerline.
 """
 def reward_function(params):
 
-    distance_from_center = params['distance_from_center']
-    track_width = params['track_width']
+    target_x = params['target_x']
+    target_y = params['target_y']
+    target_z = params['target_z']
 
-    marker_1 = 0.1 * track_width
-    marker_2 = 0.25 * track_width
-    marker_3 = 0.5 * track_width
+    x = params['z']
+    y = params['y']
+    z = params['z']
 
-    reward = 1e-3
-    if distance_from_center <= marker_1:
-        reward = 1
-    elif distance_from_center <= marker_2:
-        reward = 0.5
-    elif distance_from_center <= marker_3:
-        reward = 0.1
-    else:
-        reward = 1e-3  # likely crashed/ close to off track
+    dx = x - target_x
+    dy = y - target_y
+    dz = z = target_z
+
+    # rotations needed for drone camera to face target
+    pitch = -math.atan2(dy, math.sqrt(dx*dx + dz*dz))
+    yaw = math.atan2(dz, dx) - 1.5708
+
+    # higher reward for less needed rotation
+    reward = 1 - ((math.abs(pitch) + math.abs(yaw)) / (math.pi*2))
 
     return float(reward)

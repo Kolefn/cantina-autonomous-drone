@@ -1,5 +1,6 @@
 import argparse
 import json
+import math
 import logging
 import os
 import shutil
@@ -7,16 +8,14 @@ import time
 import traceback
 import sys
 import numpy as np
-import subprocess
 
 import markov.defaults as defaults
-import markov.deepracer_memory as deepracer_memory
+import markov.deeprotor_memory as deeprotor_memory
 
 from markov.s3_client import SageS3Client
 from markov.utils import get_ip_from_host, load_model_metadata, DoorMan
 from markov.s3_boto_data_store import S3BotoDataStore, S3BotoDataStoreParameters
-
-from rl_coach import core_types
+from rl_coach.core_types import RunPhase
 from rl_coach.base_parameters import TaskParameters, DistributedCoachSynchronizationType, Frameworks
 from rl_coach.logger import screen
 from rl_coach.memories.backend.redis import RedisPubSubMemoryBackendParameters
@@ -43,7 +42,8 @@ def data_store_ckpt_save(data_store):
         time.sleep(10)
 
 
-def training_worker(graph_manager, checkpoint_dir, use_pretrained_model, framework, memory_backend_params):
+def training_worker(graph_manager, checkpoint_dir, use_pretrained_model, framework,
+                             memory_backend_params, user_batch_size, user_episode_per_rollout):
     """
     restore a checkpoint then perform rollouts using the restored model
     """
@@ -75,23 +75,45 @@ def training_worker(graph_manager, checkpoint_dir, use_pretrained_model, framewo
     # training loop
     steps = 0
 
-    graph_manager.memory_backend = deepracer_memory.DeepRacerTrainerBackEnd(memory_backend_params)
+    graph_manager.memory_backend = deeprotor_memory.DeepRotorTrainerBackEnd(memory_backend_params)
 
     # To handle SIGTERM
     door_man = DoorMan()
 
     try:
         while steps < graph_manager.improve_steps.num_steps:
-            graph_manager.phase = core_types.RunPhase.TRAIN
+            graph_manager.phase = RunPhase.TRAIN
             graph_manager.fetch_from_worker(graph_manager.agent_params.algorithm.num_consecutive_playing_steps)
-            graph_manager.phase = core_types.RunPhase.UNDEFINED
+            graph_manager.phase = RunPhase.UNDEFINED
+
+            episodes_in_rollout = graph_manager.memory_backend.get_total_episodes_in_rollout()
+
+            for level in graph_manager.level_managers:
+                for agent in level.agents.values():
+                    agent.ap.algorithm.num_consecutive_playing_steps.num_steps = episodes_in_rollout
+                    agent.ap.algorithm.num_steps_between_copying_online_weights_to_target.num_steps = episodes_in_rollout
 
             if graph_manager.should_train():
+                # Make sure we have enough data for the requested batches
+                rollout_steps = graph_manager.memory_backend.get_rollout_steps()
+                if rollout_steps <= 0:
+                    utils.json_format_logger("No rollout data retrieved from the rollout worker",
+                                                       **utils.build_system_error_dict(utils.SIMAPP_TRAINING_WORKER_EXCEPTION,
+                                                                                       utils.SIMAPP_EVENT_ERROR_CODE_500))
+                    utils.simapp_exit_gracefully()
+
+                episode_batch_size =  user_batch_size if rollout_steps > user_batch_size else 2**math.floor(math.log(rollout_steps, 2))
+                # Set the batch size to the closest power of 2 such that we have at least two batches, this prevents coach from crashing
+                # as  batch size less than 2 causes the batch list to become a scalar which causes an exception
+                for level in graph_manager.level_managers:
+                    for agent in level.agents.values():
+                        agent.ap.network_wrappers['main'].batch_size = episode_batch_size
+
                 steps += 1
 
-                graph_manager.phase = core_types.RunPhase.TRAIN
+                graph_manager.phase = RunPhase.TRAIN
                 graph_manager.train()
-                graph_manager.phase = core_types.RunPhase.UNDEFINED
+                graph_manager.phase = RunPhase.UNDEFINED
 
                 # Check for Nan's in all agents
                 rollout_has_nan = False
@@ -101,10 +123,10 @@ def training_worker(graph_manager, checkpoint_dir, use_pretrained_model, framewo
                             rollout_has_nan = True
                 #! TODO handle NaN's on a per agent level for distributed training
                 if rollout_has_nan:
-                    utils.json_format_logger("NaN detected in loss function, aborting training. Job failed!",
+                    utils.json_format_logger("NaN detected in loss function, aborting training.",
                                  **utils.build_system_error_dict(utils.SIMAPP_TRAINING_WORKER_EXCEPTION,
-                                                                 utils.SIMAPP_EVENT_ERROR_CODE_503))
-                    sys.exit(1)
+                                                                 utils.SIMAPP_EVENT_ERROR_CODE_500))
+                    utils.simapp_exit_gracefully()
 
                 if graph_manager.agent_params.algorithm.distributed_coach_synchronization_type == DistributedCoachSynchronizationType.SYNC:
                     graph_manager.save_checkpoint()
@@ -113,6 +135,11 @@ def training_worker(graph_manager, checkpoint_dir, use_pretrained_model, framewo
                 # Clear any data stored in signals that is no longer necessary
                 graph_manager.reset_internal_state()
 
+            for level in graph_manager.level_managers:
+                for agent in level.agents.values():
+                    agent.ap.algorithm.num_consecutive_playing_steps.num_steps = user_episode_per_rollout
+                    agent.ap.algorithm.num_steps_between_copying_online_weights_to_target.num_steps = user_episode_per_rollout
+
             if door_man.terminate_now:
                 utils.json_format_logger("Received SIGTERM. Checkpointing before exiting.",
                            **utils.build_system_error_dict(utils.SIMAPP_TRAINING_WORKER_EXCEPTION, utils.SIMAPP_EVENT_ERROR_CODE_500))
@@ -120,27 +147,18 @@ def training_worker(graph_manager, checkpoint_dir, use_pretrained_model, framewo
                 break
 
     except Exception as e:
-        utils.json_format_logger("An error occured while training: {}. Job failed!.".format(e),
-                   **utils.build_system_error_dict(utils.SIMAPP_TRAINING_WORKER_EXCEPTION, utils.SIMAPP_EVENT_ERROR_CODE_503))
+        utils.json_format_logger("An error occured while training: {}.".format(e),
+                   **utils.build_system_error_dict(utils.SIMAPP_TRAINING_WORKER_EXCEPTION, utils.SIMAPP_EVENT_ERROR_CODE_500))
         traceback.print_exc()
-        sys.exit(1)
+        utils.simapp_exit_gracefully()
     finally:
         graph_manager.data_store.upload_finished_file()
 
 
-def start_redis_server():
-    p = subprocess.Popen("redis-server /etc/redis/redis.conf", shell=True, stderr=subprocess.STDOUT)
-    time.sleep(5)
-    if p.poll() is not None:
-        raise RuntimeError("Could not start Redis server.")
-    else:
-        print("Redis server started successfully!")
-    return p
-        
-        
 def main():
-    screen.set_use_colors(False)
+  screen.set_use_colors(False)
 
+  try:
     parser = argparse.ArgumentParser()
     parser.add_argument('-pk', '--preset_s3_key',
                         help="(string) Name of a preset to download from S3",
@@ -186,7 +204,6 @@ def main():
                         type=str,
                         default=os.environ.get("AWS_REGION", "us-east-1"))
 
-    start_redis_server()
     args, unknown = parser.parse_known_args()
 
     s3_client = SageS3Client(bucket=args.s3_bucket, s3_prefix=args.s3_prefix, aws_region=args.aws_region)
@@ -206,7 +223,7 @@ def main():
         preset_local_path = "./markov/presets/preset.py"
         success_custom_preset = s3_client.download_file(s3_key=args.preset_s3_key, local_path=preset_local_path)
         if not success_custom_preset:
-            logger.info("Could not download the preset file. Using the default DeepRacer preset.")
+            logger.info("Could not download the preset file. Using the default DeepRotor preset.")
         else:
             preset_location = "markov.presets.preset:graph_manager"
             graph_manager = short_dynamic_import(preset_location, ignore_module_case=True)
@@ -230,13 +247,12 @@ def main():
     host_ip_address = get_ip_from_host()
     s3_client.write_ip_config(host_ip_address)
     logger.info("Uploaded IP address information to S3: %s" % host_ip_address)
-
-    use_pretrained_model = False
-    if args.pretrained_s3_bucket and args.pretrained_s3_prefix:
+    use_pretrained_model = args.pretrained_s3_bucket and args.pretrained_s3_prefix
+    if use_pretrained_model:
         s3_client_pretrained = SageS3Client(bucket=args.pretrained_s3_bucket,
                                             s3_prefix=args.pretrained_s3_prefix,
                                             aws_region=args.aws_region)
-        use_pretrained_model = s3_client_pretrained.download_model(args.pretrained_checkpoint_dir)
+        s3_client_pretrained.download_model(args.pretrained_checkpoint_dir)
 
     memory_backend_params = RedisPubSubMemoryBackendParameters(redis_address="localhost",
                                                                redis_port=6379,
@@ -257,9 +273,15 @@ def main():
         checkpoint_dir=args.checkpoint_dir,
         use_pretrained_model=use_pretrained_model,
         framework=args.framework,
-        memory_backend_params=memory_backend_params
+        memory_backend_params=memory_backend_params,
+        user_batch_size = json.loads(robomaker_hyperparams_json)["batch_size"],
+        user_episode_per_rollout = json.loads(robomaker_hyperparams_json)["num_episodes_between_training"]
     )
-
+  except Exception as ex:
+      utils.json_format_logger("Training worker exited with exception: {}".format(ex),
+                                         **utils.build_system_error_dict(utils.SIMAPP_TRAINING_WORKER_EXCEPTION,
+                                                                                      utils.SIMAPP_EVENT_ERROR_CODE_500))
+      utils.simapp_exit_gracefully()
 
 if __name__ == '__main__':
     main()
