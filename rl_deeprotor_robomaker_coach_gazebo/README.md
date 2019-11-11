@@ -1,21 +1,20 @@
-# DeepRacer notebook using Amazon SageMaker RL and AWS RoboMaker services
+# DeepRotor notebook using Amazon SageMaker RL and AWS RoboMaker services
 
-This folder contains examples of how to use RL to train an autonomous deepracer. This is a jailbreaker for the AWS DeepRacer. This gives a glimse of architecture used to get the DeepRacer working.
+This folder contains examples of how to use RL to train an autonomous drone. This is a based off the the AWS DeepRacer code found at [https://github.com/awslabs/amazon-sagemaker-examples/tree/master/reinforcement_learning/rl_deepracer_robomaker_coach_gazebo](rl_deepracer_robomaker_coach_gazebo). This gives a glimse of architecture used to get the DeepRotor working.
 
 
 ## Contents
 
-* `deepracer_rl.ipynb`: notebook for training autonomous race car.
+* `deeprotor_rl.ipynb`: notebook for training autonomous drone.
 
 * `Dockerfile`: Custom docker instead of using SageMaker default docker
 
 * `src/`
   * `training_worker.py`: Main entrypoint for starting distributed training job
   * `markov/`: Helper files for S3 upload/download
-   * `presets/default.py`: Preset (configuration) for DeepRacer
+   * `presets/default.py`: Preset (configuration) for DeepRotor
    * `rewards/default.py`: Custom reward function
-   * `environments/deepracer_racetrack_env.py`: Gym environment file for DeepRacer
-   * `actions/model_metadata_10_state.json`: JSON file to customize your action space & the speed
+   * `environments/deeprotor_racetrack_env.py`: Gym environment file for DeepRotor
   * `lib/`: redis configuration file and ppo_head.py customized tensorflow file copied to sagemaker container.
 
 * `common/`: helper function to build docker files.
@@ -30,5 +29,5 @@ This folder contains examples of how to use RL to train an autonomous deepracer.
 6. Select the git repository and clone this repository.
 7. Then click create notebook instance button at the button
 8. This takes like 2 min to create your notebook instance. Then click on the newly created instance and click on the juypter notebook.
-9. You will see all the github files and now run `deepracer_rl.ipynb`
+9. You will see all the github files and now run `deeprotor_rl.ipynb`
 10. Run clean robomaker & sagemaker commands in the script only when you are done with training.

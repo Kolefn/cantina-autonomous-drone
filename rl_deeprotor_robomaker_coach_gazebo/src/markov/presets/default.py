@@ -60,7 +60,7 @@ SilverstoneInputFilter.add_observation_filter('observation', 'stacking', Observa
 
 env_params = GymVectorEnvironment()
 env_params.default_input_filter = SilverstoneInputFilter
-env_params.level = 'DeepRacerRacetrackCustomActionSpaceEnv-v0'
+env_params.level = 'DeepRotorEnv-v0'
 
 vis_params = VisualizationParameters()
 vis_params.dump_mp4 = False

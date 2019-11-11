@@ -9,9 +9,6 @@ ENTRY_POINT = 'markov.environments.deeprotor_env:DeepRotorEnv'
 # Default reward threshold
 THRESHOLD = 200
 
-"""
-Default reward function is the centerline.
-"""
 def reward_function(params):
 
     target_x = params['target_x']
