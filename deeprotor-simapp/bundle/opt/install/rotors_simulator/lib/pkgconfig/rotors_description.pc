@@ -1,8 +1,0 @@
-prefix=/home/kole/rotors_simulator_ws/install/src
-
-Name: rotors_description
-Description: Description of rotors_description
-Version: 2.2.3
-Cflags: 
-Libs: -L/home/kole/rotors_simulator_ws/install/src/lib 
-Requires: 

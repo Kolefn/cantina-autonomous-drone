@@ -1,8 +1,0 @@
-prefix=/opt/ros/kinetic
-
-Name: h264_video_encoder
-Description: Description of h264_video_encoder
-Version: 1.1.4
-Cflags: 
-Libs: -L/opt/ros/kinetic/lib 
-Requires: aws_ros1_common image_transport message_runtime

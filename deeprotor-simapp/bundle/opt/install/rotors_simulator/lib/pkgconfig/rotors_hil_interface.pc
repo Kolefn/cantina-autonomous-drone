@@ -1,8 +1,0 @@
-prefix=/home/kole/rotors_simulator_ws/install/src
-
-Name: rotors_hil_interface
-Description: Description of rotors_hil_interface
-Version: 2.2.3
-Cflags: -I/home/kole/rotors_simulator_ws/install/src/include
-Libs: -L/home/kole/rotors_simulator_ws/install/src/lib -lrotors_hil_interface
-Requires: geometry_msgs mav_msgs mavros mavros_msgs roscpp sensor_msgs

@@ -1,8 +1,0 @@
-prefix=/home/kole/rotors_simulator_ws/install/src
-
-Name: rqt_rotors
-Description: Description of rqt_rotors
-Version: 2.2.3
-Cflags: 
-Libs: -L/home/kole/rotors_simulator_ws/install/src/lib 
-Requires: mavros_msgs rospy rqt_gui rqt_gui_py

@@ -1,3 +1,0 @@
-libhdf5-cpp-11: package-name-doesnt-match-sonames libhdf5-cpp11 libhdf5-hl-cpp11
-# false positive because upstream release is 1.8.15-patch1
-libhdf5-cpp-11: symbols-file-contains-debian-revision on symbol HDF5_CPP_1.8.15.1@HDF5_CPP_1.8.15.1 and 153 others

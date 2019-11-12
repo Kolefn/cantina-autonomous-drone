@@ -1,3 +1,0 @@
-# Upstream does not provide manpages
-vtk6: binary-without-manpage
-vtk6: hardening-no-relro

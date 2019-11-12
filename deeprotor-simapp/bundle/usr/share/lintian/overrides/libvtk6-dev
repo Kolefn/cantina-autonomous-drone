@@ -1,5 +1,0 @@
-libvtk6-dev: shlib-without-versioned-soname
-libvtk6-dev: package-name-doesnt-match-sonames
-libvtk6-dev: postinst-must-call-ldconfig
-libvtk6-dev: hardening-no-relro
-

@@ -1,3 +1,0 @@
-libvtk6.2-qt: hardening-no-relro
-libvtk6.2-qt: package-name-doesnt-match-sonames
-

@@ -1,1 +1,0 @@
-from vtkViewsGeovisPython import *

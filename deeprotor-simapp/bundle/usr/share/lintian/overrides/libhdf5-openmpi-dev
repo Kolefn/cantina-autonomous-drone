@@ -1,2 +1,0 @@
-# This is wanted
-libhdf5-openmpi-dev: symlink-is-self-recursive usr/lib/*/openmpi/lib .

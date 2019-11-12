@@ -1,8 +1,0 @@
-prefix=/home/kole/rotors_simulator_ws/install/src
-
-Name: mav_msgs
-Description: Description of mav_msgs
-Version: 3.3.3
-Cflags: -I/home/kole/rotors_simulator_ws/install/src/include -I/usr/include/eigen3
-Libs: -L/home/kole/rotors_simulator_ws/install/src/lib 
-Requires: message_runtime std_msgs geometry_msgs trajectory_msgs
