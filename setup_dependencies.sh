@@ -16,6 +16,9 @@ sudo apt-get install libignition-math2-dev
 # fix bug in dependency code
 sed -i 's/msg.twist_covariance/msg.velocity_covariance/g' deeprotor_ws/src/mavros/mavros_extras/src/plugins/odom.cpp
 
+# Download and install AWS c++ deps
+bash ./setup_aws_cpp_sdk.sh
+
 # Setup for bundling & running
 sudo rosdep init
 rosdep update
