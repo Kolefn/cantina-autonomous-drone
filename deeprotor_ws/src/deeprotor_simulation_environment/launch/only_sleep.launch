@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="sleeper" pkg="deeprotor_simulation_environment" type="only_sleep.sh" output="screen"/>
+</launch>
