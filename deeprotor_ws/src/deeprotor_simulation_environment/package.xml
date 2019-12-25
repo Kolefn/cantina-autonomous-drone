@@ -33,6 +33,7 @@
   <exec_depend>python-scipy</exec_depend>
   <exec_depend>python-numpy</exec_depend>
   <exec_depend>rotors_simulator</exec_depend>
+  <exec_depend>rotors_gazebo</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
