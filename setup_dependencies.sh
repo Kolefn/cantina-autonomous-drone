@@ -15,3 +15,8 @@ sudo apt-get install libignition-math2-dev
 
 # fix bug in dependency code
 sed -i 's/msg.twist_covariance/msg.velocity_covariance/g' deeprotor_ws/src/deeprotor_simulation_environment/mavros/mavros_extras/src/plugins/odom.cpp
+
+# Setup for bundling & running
+sudo rosdep init
+rosdep update
+rosdep install --from-paths deeprotor_ws/src --ignore-src -r -y
