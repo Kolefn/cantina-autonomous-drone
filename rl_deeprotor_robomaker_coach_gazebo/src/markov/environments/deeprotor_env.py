@@ -120,7 +120,6 @@ class DeepRotorEnv(gym.Env):
             self.velocity_pub = rospy.Publisher("/drone/command/motor_speed", Actuators, queue_size=1)
 
             # Read in parameters
-            self.world_name = rospy.get_param('WORLD_NAME')
             self.job_type = rospy.get_param('JOB_TYPE')
             self.aws_region = rospy.get_param('AWS_REGION')
             self.metrics_s3_bucket = rospy.get_param('METRICS_S3_BUCKET')
