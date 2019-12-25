@@ -1,5 +1,7 @@
 # Build the workspace
-colcon build --build-base deeprotor_ws/
+cd deeprotor_ws/
+colcon build
+cd ..
 
 # Setup for bundling & running
 sudo rosdep init
