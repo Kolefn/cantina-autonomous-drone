@@ -6,8 +6,7 @@ mkdir build
 cd build
 
 # Build only the components we need
-cmake .. -DBUILD_ONLY=kinesis -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS=ON
-cmake .. -DBUILD_ONLY=logs -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS=ON
+cmake .. -DBUILD_ONLY=kinesis;logs -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS=ON
 
 # Install components
 make
