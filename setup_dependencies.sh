@@ -2,7 +2,7 @@
 wstool init deeprotor_ws/src/deeprotor_simulation_environment
 wget -O deeprotor_ws/src/deeprotor_simulation_environment/rotors_hil.rosinstall https://raw.githubusercontent.com/ethz-asl/rotors_simulator/master/rotors_hil.rosinstall
 wstool merge -t deeprotor_ws/src/deeprotor_simulation_environment deeprotor_ws/src/deeprotor_simulation_environment/rotors_hil.rosinstall
-wstool -t update deeprotor_ws/src/deeprotor_simulation_environment
+wstool update -t deeprotor_ws/src/deeprotor_simulation_environment
 
 # install additional dependencies for rotors_simulator
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
