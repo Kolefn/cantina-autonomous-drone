@@ -46,6 +46,7 @@ lib/
 .DS_Store
 
 # Generated Dependencies
+deeprotor_ws/src/deeprotor_simulation_environment/.rosinstall
 deeprotor_ws/src/deeprotor_simulation_environment/rotors_simulator
 deeprotor_ws/src/deeprotor_simulation_environment/rotors_hil.rosinstall
 deeprotor_ws/src/deeprotor_simulation_environment/mavros
