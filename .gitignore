@@ -1,13 +1,8 @@
 # colcon
 install/
 log/
-
-# catkin workspace  
-devel/
-logs/
 build/
-bin/
-lib/
+bundle/
 
 # Prerequisites
 *.d
