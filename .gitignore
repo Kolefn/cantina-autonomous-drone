@@ -42,10 +42,16 @@ lib/
 *.out
 *.app
 
-simulation/build
-
+# Mac OS
 .DS_Store
 
-*.tar.gz
+# Generated Dependencies
+deeprotor_ws/src/deeprotor_simulation_environment/rotors_simulator
+deeprotor_ws/src/deeprotor_simulation_environment/rotors_hil.rosinstall
+deeprotor_ws/src/deeprotor_simulation_environment/mavros
+deeprotor_ws/src/deeprotor_simulation_environment/mavlink
+deeprotor_ws/src/deeprotor_simulation_environment/mav_comm
 
+# Colcon bundle for reference 
 deeprotor-simapp
+*.tar.gz
