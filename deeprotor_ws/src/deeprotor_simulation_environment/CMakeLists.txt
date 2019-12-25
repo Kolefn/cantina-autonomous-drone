@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(deeprotor_simulation_environment)
 
-find_package(catkin REQUIRED gazebo_ros std_msgs message_generation gazebo_ros_control gazebo_plugins h264_video_encoder h264_encoder_core kinesis_video_streamer robot_state_publisher std_msgs message_runtime rotors_gazebo)
+find_package(catkin REQUIRED gazebo_ros std_msgs message_generation)
 find_package(AWSSDK REQUIRED COMPONENTS kinesis logs)
 
 add_service_files(
