@@ -300,8 +300,7 @@ class DeepRotorEnv(gym.Env):
             model_state.pose.orientation.x,
             model_state.pose.orientation.y,
             model_state.pose.orientation.z,
-            model_state.pose.orientation.w])
-        .as_euler('zyx')
+            model_state.pose.orientation.w]).as_euler('zyx')
 
         model_x = model_state.pose.position.x
         model_y = model_state.pose.position.y
