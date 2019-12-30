@@ -21,9 +21,17 @@ catkin_package(
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
+install(PROGRAMS
+    scripts/drone_node.py
+    scripts/rotation.py
+    scripts/run_local_rl_agent.sh
+    scripts/run_rollout_rl_agent.sh
+    scripts/run_evaluation_rl_agent.sh
+    scripts/only_sleep.sh
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 foreach(dir config launch models srv urdf worlds)
     install(DIRECTORY ${dir}/
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
 endforeach(dir)
-
-install(DIRECTORY lib/ DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/deeprotor_simulation_environment)
