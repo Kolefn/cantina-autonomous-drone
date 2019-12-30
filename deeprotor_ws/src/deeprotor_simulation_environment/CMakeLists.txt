@@ -26,4 +26,4 @@ foreach(dir config launch models srv urdf worlds)
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
 endforeach(dir)
 
-install(DIRECTORY src/ DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/deeprotor_simulation_environment)
+install(DIRECTORY lib/ DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/deeprotor_simulation_environment)
