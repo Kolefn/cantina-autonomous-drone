@@ -18,7 +18,8 @@ import queue
 import numpy as np
 from gym import spaces
 from PIL import Image
-from markov import utils, Actuators
+from markov import utils
+from mav_msgs.msg import Actuators
 
 logger = utils.Logger(__name__, logging.INFO).get_logger()
 
