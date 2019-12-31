@@ -29,7 +29,6 @@
   <exec_depend>ros_control</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>message_runtime</exec_depend>
-  <exec_depend>python-shapely</exec_depend>
   <exec_depend>python-scipy</exec_depend>
   <exec_depend>python-numpy</exec_depend>
   <exec_depend>rotors_simulator</exec_depend>

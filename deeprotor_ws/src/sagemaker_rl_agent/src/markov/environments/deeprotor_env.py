@@ -35,8 +35,6 @@ if node_type == SIMULATION_WORKER:
     from gazebo_msgs.srv import GetLinkState, GetModelState
     from scipy.spatial.transform import Rotation
     from sensor_msgs.msg import Image as sensor_image
-    from shapely.geometry import Point, Polygon
-    from shapely.geometry.polygon import LinearRing, LineString
     from deeprotor_simulation_environment.srv import ResetDroneSrv
     from markov.s3_simdata_upload import DeepRotorSimTraceData
 
