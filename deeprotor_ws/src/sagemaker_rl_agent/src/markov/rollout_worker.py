@@ -26,7 +26,7 @@ import markov.defaults as defaults
 from markov.s3_boto_data_store import S3BotoDataStore, S3BotoDataStoreParameters
 from markov.s3_client import SageS3Client
 
-from markov.utils import load_model_metadata
+# from markov.utils import load_model_metadata
 
 from rl_coach.base_parameters import TaskParameters, DistributedCoachSynchronizationType
 from rl_coach.core_types import RunPhase, EnvironmentEpisodes, EnvironmentSteps
@@ -231,8 +231,8 @@ def main():
     logger.info("S3 prefix: %s" % args.s3_prefix)
 
     # Load the model metadata
-    model_metadata_local_path = os.path.join(CUSTOM_FILES_PATH, 'model_metadata.json')
-    load_model_metadata(s3_client, args.model_metadata_s3_key, model_metadata_local_path)
+    # model_metadata_local_path = os.path.join(CUSTOM_FILES_PATH, 'model_metadata.json')
+    # load_model_metadata(s3_client, args.model_metadata_s3_key, model_metadata_local_path)
 
     # Download reward function
     if not args.reward_file_s3_key:

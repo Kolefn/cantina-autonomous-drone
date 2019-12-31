@@ -13,7 +13,7 @@ import markov.defaults as defaults
 import markov.deeprotor_memory as deeprotor_memory
 
 from markov.s3_client import SageS3Client
-from markov.utils import get_ip_from_host, load_model_metadata, DoorMan
+from markov.utils import get_ip_from_host, DoorMan
 from markov.s3_boto_data_store import S3BotoDataStore, S3BotoDataStoreParameters
 from rl_coach.core_types import RunPhase
 from rl_coach.base_parameters import TaskParameters, DistributedCoachSynchronizationType, Frameworks
@@ -209,10 +209,10 @@ def main():
     s3_client = SageS3Client(bucket=args.s3_bucket, s3_prefix=args.s3_prefix, aws_region=args.aws_region)
 
     # Load the model metadata
-    model_metadata_local_path = os.path.join(CUSTOM_FILES_PATH, 'model_metadata.json')
-    load_model_metadata(s3_client, args.model_metadata_s3_key, model_metadata_local_path)
-    s3_client.upload_file(os.path.normpath("%s/model/model_metadata.json" % args.s3_prefix), model_metadata_local_path)
-    shutil.copy2(model_metadata_local_path, SM_MODEL_OUTPUT_DIR)
+    # model_metadata_local_path = os.path.join(CUSTOM_FILES_PATH, 'model_metadata.json')
+    # load_model_metadata(s3_client, args.model_metadata_s3_key, model_metadata_local_path)
+    # s3_client.upload_file(os.path.normpath("%s/model/model_metadata.json" % args.s3_prefix), model_metadata_local_path)
+    # shutil.copy2(model_metadata_local_path, SM_MODEL_OUTPUT_DIR)
 
     # Register the gym enviroment, this will give clients the ability to creat the enviroment object
     register(id=defaults.ENV_ID, entry_point=defaults.ENTRY_POINT,
