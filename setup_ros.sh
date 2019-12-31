@@ -12,5 +12,5 @@ sudo apt-get update
 sudo apt-get install gazebo7 -y
 
 # Colcon for build and bundling 
-pip3 install -U setuptools
-pip3 install -U colcon-common-extensions colcon-ros-bundle
+python3 -m pip install setuptools
+python3 -m pip install colcon-common-extensions colcon-ros-bundle
