@@ -13,7 +13,7 @@ setup(
     packages=find_packages(),
     python_requires=REQUIRES_PYTHON,
     install_requires=[
-        'boto3==1.9.23',
+        'boto3==1.10.45',
         'futures==3.1.1',
         'gym==0.10.5',
         'kubernetes==7.0.0',
