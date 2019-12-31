@@ -19,7 +19,7 @@ setup(
         'kubernetes==7.0.0',
         'minio==4.0.5',
         'numpy==1.17.4',
-        'pandas==0.25.3',
+        'pandas==0.24.2',
         'Pillow==6.2.0',
         'pygame==1.9.3',
         'PyYAML==4.2b1',
