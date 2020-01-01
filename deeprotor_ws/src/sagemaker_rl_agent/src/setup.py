@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 # Package meta-data.
 NAME = 'sagemaker_rl_agent'
-REQUIRES_PYTHON = '>=3.5.0'
+REQUIRES_PYTHON = '>=3.6.10'
 
 setup(
     name=NAME,
