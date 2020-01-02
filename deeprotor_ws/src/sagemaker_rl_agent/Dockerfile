@@ -51,13 +51,10 @@ RUN pip install \
     kubernetes==7.0.0 \
     PyYAML==4.2b1 \
     rospkg==1.1.7 \
-    tensorflow==1.14.0
+    tensorflow==1.14.0 \
+    scipy==1.2.2
 
-# Ignore lower version of scipy that is installed with sagemaker-containers
-RUN pip install -I scipy==1.4.1
 
-# Ignore version of numpy installed with scipy
-RUN pip install -I numpy==1.17.4
 
 
 # Patch intel coach so that discrete distributions can not produce nan's
