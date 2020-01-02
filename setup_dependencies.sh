@@ -8,7 +8,6 @@ wstool update -t deeprotor_ws/src
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python get-pip.py
 sudo pip install future
-sudo apt-get install ros-kinetic-geographic-msgs
 sudo apt-get install libgeographic-dev
 sudo apt-get install geographiclib-tools
 sudo apt-get install libignition-math2-dev

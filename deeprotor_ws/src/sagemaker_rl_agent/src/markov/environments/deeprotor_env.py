@@ -18,7 +18,8 @@ import queue
 import numpy as np
 from gym import spaces
 from PIL import Image
-from markov import utils, Actuators
+from markov import utils
+from mav_msgs.msg import Actuators
 
 logger = utils.Logger(__name__, logging.INFO).get_logger()
 
@@ -34,8 +35,6 @@ if node_type == SIMULATION_WORKER:
     from gazebo_msgs.srv import GetLinkState, GetModelState
     from scipy.spatial.transform import Rotation
     from sensor_msgs.msg import Image as sensor_image
-    from shapely.geometry import Point, Polygon
-    from shapely.geometry.polygon import LinearRing, LineString
     from deeprotor_simulation_environment.srv import ResetDroneSrv
     from markov.s3_simdata_upload import DeepRotorSimTraceData
 
@@ -300,8 +299,7 @@ class DeepRotorEnv(gym.Env):
             model_state.pose.orientation.x,
             model_state.pose.orientation.y,
             model_state.pose.orientation.z,
-            model_state.pose.orientation.w])
-            .as_euler('zyx')
+            model_state.pose.orientation.w]).as_euler('zyx')
 
         model_x = model_state.pose.position.x
         model_y = model_state.pose.position.y

@@ -7,7 +7,7 @@ import json
 import markov.environments
 from markov.s3_client import SageS3Client
 from markov.s3_boto_data_store import S3BotoDataStore, S3BotoDataStoreParameters
-from markov.utils import load_model_metadata
+# from markov.utils import load_model_metadata
 from markov.utils import Logger
 from rl_coach.base_parameters import TaskParameters
 from rl_coach.core_types import EnvironmentSteps
@@ -76,8 +76,8 @@ def main():
              max_episode_steps=defaults.MAX_STEPS, reward_threshold=defaults.THRESHOLD)
 
     # Load the model metadata
-    model_metadata_local_path = os.path.join(CUSTOM_FILES_PATH, 'model_metadata.json')
-    load_model_metadata(s3_client, os.path.normpath("%s/model/model_metadata.json" % args.s3_prefix), model_metadata_local_path)
+    # model_metadata_local_path = os.path.join(CUSTOM_FILES_PATH, 'model_metadata.json')
+    # load_model_metadata(s3_client, os.path.normpath("%s/model/model_metadata.json" % args.s3_prefix), model_metadata_local_path)
 
     # Download the model
     s3_client.download_model(args.local_model_directory)
