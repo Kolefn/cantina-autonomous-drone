@@ -19,7 +19,6 @@ import numpy as np
 from gym import spaces
 from PIL import Image
 from markov import utils
-from mav_msgs.msg import Actuators
 
 logger = utils.Logger(__name__, logging.INFO).get_logger()
 
@@ -37,6 +36,7 @@ if node_type == SIMULATION_WORKER:
     from sensor_msgs.msg import Image as sensor_image
     from deeprotor_simulation_environment.srv import ResetDroneSrv
     from markov.s3_simdata_upload import DeepRotorSimTraceData
+    from mav_msgs.msg import Actuators
 
 # Type of job
 TRAINING_JOB = 'TRAINING'
