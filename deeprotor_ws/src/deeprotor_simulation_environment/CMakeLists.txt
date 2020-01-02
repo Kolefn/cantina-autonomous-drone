@@ -4,8 +4,8 @@ project(deeprotor_simulation_environment)
 find_package(catkin REQUIRED gazebo_ros mav_msgs std_msgs message_generation)
 find_package(AWSSDK REQUIRED COMPONENTS kinesis logs)
 
+add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
 add_dependencies(mav_msgs ${catkin_EXPORTED_TARGETS})
-
 
 add_service_files(
     DIRECTORY srv
