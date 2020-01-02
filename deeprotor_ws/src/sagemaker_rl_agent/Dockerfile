@@ -41,7 +41,7 @@ RUN pip install \
     gym==0.10.5 \
     retrying \
     eventlet \
-    boto3 \
+    boto3==1.10.45 \
     minio==4.0.5 \
     futures==3.1.1 \
     redis==3.3.8
