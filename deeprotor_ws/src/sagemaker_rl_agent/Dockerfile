@@ -27,6 +27,11 @@ RUN \
     make && \
     make install
 
+#Install rl coach
+RUN pip install rl-coach-slim==0.11.1
+
+RUN pip install --no-cache-dir --upgrade sagemaker-containers
+
 # Bootstrap the PIP installs to make it faster to re-build the container image on code changes.
 RUN pip install \
     annoy==1.8.3 \
@@ -49,11 +54,6 @@ RUN pip install \
     PyYAML==4.2b1 \
     rospkg==1.1.7 \
     tensorflow==1.14.0
-
-#Install rl coach
-RUN pip install rl-coach-slim==0.11.1
-
-RUN pip install --no-cache-dir --upgrade sagemaker-containers
 
 
 # Patch intel coach so that discrete distributions can not produce nan's
