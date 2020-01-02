@@ -48,7 +48,7 @@ RUN pip install \
     kubernetes==7.0.0 \
     PyYAML==4.2b1 \
     rospkg==1.1.7 \
-    tensorflow==1.15.0
+    tensorflow==1.14.0
 
 #Install rl coach
 RUN pip install rl-coach-slim==0.11.1
