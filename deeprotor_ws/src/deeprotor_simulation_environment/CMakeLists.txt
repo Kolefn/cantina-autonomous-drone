@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(deeprotor_simulation_environment)
 
-find_package(catkin REQUIRED gazebo_ros std_msgs mav_msgs message_generation)
+find_package(catkin REQUIRED gazebo_ros std_msgs message_generation)
+find_package(catkin REQUIRED COMPONENTS mav_msgs)
 find_package(AWSSDK REQUIRED COMPONENTS kinesis logs)
 
 add_service_files(
