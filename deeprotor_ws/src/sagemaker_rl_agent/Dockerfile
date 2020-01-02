@@ -30,13 +30,13 @@ RUN \
 # Bootstrap the PIP installs to make it faster to re-build the container image on code changes.
 RUN pip install \
     annoy==1.8.3 \
-    Pillow==4.3.0 \
+    Pillow==6.2.0 \
     matplotlib==2.0.2 \
-    numpy==1.17.0 \
-    pandas==0.22.0 \
+    numpy==1.17.4 \
+    pandas==0.24.0 \
     pygame==1.9.3 \
     PyOpenGL==3.1.0 \
-    scipy==1.3.0 \
+    scipy==1.4.1 \
     scikit-image==0.15.0 \
     gym==0.10.5 \
     retrying \
@@ -44,7 +44,11 @@ RUN pip install \
     boto3==1.10.45 \
     minio==4.0.5 \
     futures==3.1.1 \
-    redis==3.3.8
+    redis==3.3.8 \
+    kubernetes==7.0.0 \
+    PyYAML==4.2b1 \
+    rospkg==1.1.7 \
+    tensorflow==1.15.0 \
 
 #Install rl coach
 RUN pip install rl-coach-slim==0.11.1
