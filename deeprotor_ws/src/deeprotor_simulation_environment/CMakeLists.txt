@@ -2,11 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(deeprotor_simulation_environment)
 
 find_package(catkin REQUIRED gazebo_ros std_msgs message_generation)
-find_package(catkin REQUIRED COMPONENTS mav_msgs)
 find_package(AWSSDK REQUIRED COMPONENTS kinesis logs)
-
-add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
-add_dependencies(mav_msgs ${catkin_EXPORTED_TARGETS})
 
 add_service_files(
     DIRECTORY srv
@@ -25,6 +21,8 @@ catkin_package(
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
+add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
+
 install(PROGRAMS
     scripts/drone_node.py
     scripts/rotation.py
@@ -39,3 +37,4 @@ foreach(dir config launch models srv urdf worlds)
     install(DIRECTORY ${dir}/
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
 endforeach(dir)
+
