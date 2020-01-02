@@ -33,7 +33,7 @@ RUN pip install \
     Pillow==6.2.0 \
     matplotlib==2.0.2 \
     numpy==1.17.4 \
-    pandas==0.24.0 \
+    pandas==0.24.2 \
     pygame==1.9.3 \
     PyOpenGL==3.1.0 \
     scipy==1.4.1 \
