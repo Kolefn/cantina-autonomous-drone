@@ -37,7 +37,6 @@ RUN pip install \
     annoy==1.8.3 \
     Pillow==6.2.0 \
     matplotlib==2.0.2 \
-    numpy==1.17.4 \
     pandas==0.24.2 \
     pygame==1.9.3 \
     PyOpenGL==3.1.0 \
@@ -56,6 +55,9 @@ RUN pip install \
 
 # Ignore lower version of scipy that is installed with sagemaker-containers
 RUN pip install -I scipy==1.4.1
+
+# Ignore version of numpy installed with scipy
+RUN pip install -I numpy==1.17.4
 
 
 # Patch intel coach so that discrete distributions can not produce nan's
