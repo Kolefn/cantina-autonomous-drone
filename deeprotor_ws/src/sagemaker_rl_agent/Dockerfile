@@ -41,7 +41,6 @@ RUN pip install \
     pandas==0.24.2 \
     pygame==1.9.3 \
     PyOpenGL==3.1.0 \
-    scipy==1.4.1 \
     scikit-image==0.15.0 \
     gym==0.10.5 \
     retrying \
@@ -54,6 +53,9 @@ RUN pip install \
     PyYAML==4.2b1 \
     rospkg==1.1.7 \
     tensorflow==1.14.0
+
+# Ignore lower version of scipy that is installed with sagemaker-containers
+RUN pip install -I scipy==1.4.1
 
 
 # Patch intel coach so that discrete distributions can not produce nan's
