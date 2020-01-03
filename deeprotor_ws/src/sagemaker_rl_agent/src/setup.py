@@ -13,19 +13,24 @@ setup(
     packages=find_packages(),
     python_requires=REQUIRES_PYTHON,
     install_requires=[
-        'boto3==1.10.45',
-        'futures==3.1.1',
-        'gym==0.10.5',
-        'kubernetes==7.0.0',
-        'minio==4.0.5',
-        'pandas==0.24.2',
-        'Pillow==6.2.0',
-        'pygame==1.9.3',
-        'PyYAML==4.2b1',
-        'redis==3.3.8',
-        'rospkg==1.1.7',
-        'scipy==1.2.2',
-        'tensorflow==1.15.0',
+        'tensorflow==1.11',
+        'annoy==1.8.3'
+        'Pillow==4.3.0'
+        'matplotlib==2.0.2'
+        'numpy==1.14.5'
+        'pandas==0.22.0'
+        'pygame==1.9.3'
+        'PyOpenGL==3.1.0'
+        'scipy==1.2.1'
+        'scikit-image==0.13.0'
+        'gym==0.12.0'
+        'PyYAML==3.13'
+        'rospkg==1.1.7'
+        'futures==3.1.1'
+        'boto3==1.9.23'
+        'redis==3.2.1'
+        'minio==4.0.5'
+        'kubernetes==7.0.0'
         'rl-coach-slim==0.11.1'
     ],
     entry_points = {
