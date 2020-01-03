@@ -39,7 +39,7 @@ RUN pip install \
     pandas==0.22.0 \
     pygame==1.9.3 \
     PyOpenGL==3.1.0 \
-    scipy==1.2.1 \
+    scipy==1.2.2 \
     scikit-image==0.13.0 \
     gym==0.12.0 \
     PyYAML==3.13 \
