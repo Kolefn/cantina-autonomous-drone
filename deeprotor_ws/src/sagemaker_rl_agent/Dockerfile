@@ -27,8 +27,6 @@ RUN \
     make && \
     make install
     
-RUN python -m pip install --upgrade pip setuptools
-
 # Bootstrap the PIP installs to make it faster to re-build the container image on code changes.
 RUN pip install \
     retrying \
