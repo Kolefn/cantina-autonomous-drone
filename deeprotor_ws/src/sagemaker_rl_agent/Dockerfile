@@ -26,6 +26,8 @@ RUN \
     cd redis-stable && \
     make && \
     make install
+    
+RUN python -m pip install --upgrade pip setuptools
 
 # Bootstrap the PIP installs to make it faster to re-build the container image on code changes.
 RUN pip install \
@@ -46,7 +48,7 @@ RUN pip install \
     kubernetes==7.0.0 \
     PyYAML==4.2b1 \
     rospkg==1.1.7 \
-    tensorflow==1.14.0 \
+    tensorflow==1.15.0 \
     scipy==1.2.2
 
 #Install rl coach
