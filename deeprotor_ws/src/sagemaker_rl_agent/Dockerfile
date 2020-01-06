@@ -31,24 +31,24 @@ RUN \
 RUN pip install \
     retrying \
     eventlet \
-    tensorflow==1.11 \
     annoy==1.8.3 \
-    Pillow==4.3.0 \
-    matplotlib==2.0.2 \
     numpy==1.14.5 \
-    pandas==0.22.0 \
-    pygame==1.9.3 \
     PyOpenGL==3.1.0 \
-    scipy==1.2.2 \
     scikit-image==0.13.0 \
     gym==0.12.0 \
-    PyYAML==3.13 \
-    rospkg==1.1.7 \
     futures==3.1.1 \
     boto3==1.9.23 \
-    redis==3.2.1 \
+    kubernetes==7.0.0 \
     minio==4.0.5 \
-    kubernetes==7.0.0 
+    pandas==0.22.0 \
+    Pillow==4.3.0 \
+    matplotlib==2.0.2 \
+    pygame==1.9.3 \
+    PyYAML==3.13 \
+    redis==3.2.1 \
+    rospkg==1.1.7 \
+    scipy==1.2.2 \
+    tensorflow==1.11 \
 
 #Install rl coach
 RUN pip install rl-coach-slim==0.11.1
