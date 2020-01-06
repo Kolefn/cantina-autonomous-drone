@@ -43,7 +43,7 @@ def build_and_push_docker_image(repository_name, dockerfile='Dockerfile', build_
 
 
 def _build_from_dockerfile(repository_name, dockerfile='Dockerfile', build_args={}):
-    build_cmd = ['docker', 'build', '-t', repository_name, '-f', dockerfile, '.']
+    build_cmd = ['docker', 'build', '--network=host', '-t', repository_name, '-f', dockerfile, '.']
     for k,v in build_args.items():
         build_cmd += ['--build-arg', '%s=%s' % (k,v)]
 
