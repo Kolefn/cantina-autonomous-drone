@@ -48,7 +48,7 @@ RUN pip install \
     redis==3.2.1 \
     rospkg==1.1.7 \
     scipy==1.2.2 \
-    tensorflow==1.11 \
+    tensorflow==1.11
 
 #Install rl coach
 RUN pip install rl-coach-slim==0.11.1
