@@ -57,7 +57,7 @@ RUN pip install --no-cache-dir --upgrade sagemaker-containers
 
 
 # Patch intel coach so that discrete distributions can not produce nan's
-COPY src/lib/ppo_head.py /usr/local/lib/python3.6/dist-packages/rl_coach/architectures/tensorflow_components/heads/ppo_head.py
+# COPY src/lib/ppo_head.py /usr/local/lib/python3.6/dist-packages/rl_coach/architectures/tensorflow_components/heads/ppo_head.py
 
 # Copy in all the code and make it available on the path
 COPY src/lib/redis.conf /etc/redis/redis.conf
