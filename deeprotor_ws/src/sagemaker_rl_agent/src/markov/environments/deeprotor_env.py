@@ -336,10 +336,10 @@ class DeepRotorEnv(gym.Env):
         model_y = model_state.pose.position.y
         model_z = model_state.pose.position.z
 
-        rotor_state_1 = self.get_link_state('drone::rotor_1', '')
-        rotor_state_2 = self.get_link_state('drone::rotor_2', '')
-        rotor_state_3 = self.get_link_state('drone::rotor_3', '')
-        rotor_state_4 = self.get_link_state('drone::rotor_4', '')
+        rotor_state_1 = self.get_link_state('drone::rotor_0', '')
+        rotor_state_2 = self.get_link_state('drone::rotor_1', '')
+        rotor_state_3 = self.get_link_state('drone::rotor_2', '')
+        rotor_state_4 = self.get_link_state('drone::rotor_3', '')
         
         model_crashed = model_y < 0 or  rotor_state_1.pose.position.y <= 0 or \
                                         rotor_state_2.pose.position.y <= 0 or \
