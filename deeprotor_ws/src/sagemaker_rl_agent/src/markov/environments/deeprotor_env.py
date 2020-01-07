@@ -68,6 +68,36 @@ EVALUATION_SIMTRACE_DATA_S3_OBJECT_KEY = "sim_inference_logs/EvaluationSimTraceD
 SIMAPP_DATA_UPLOAD_TIME_TO_S3 = 60 #in seconds
 simapp_data_upload_timer = None
 
+POSITIVE_LIFT_VEL = 500
+NEGATIVE_LIFT_VEL = -POSITIVE_LIFT_VEL
+
+ALL_NEGATIVE_LIFT = [NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL]
+
+ALL_POSITIVE_LIFT = [POSITIVE_LIFT_VEL,POSITIVE_LIFT_VEL,POSITIVE_LIFT_VEL,POSITIVE_LIFT_VEL]
+
+R1_POSITIVE_LIFT = [POSITIVE_LIFT_VEL,0,0,0]
+R2_POSITIVE_LIFT = [0,POSITIVE_LIFT_VEL,0,0]
+R3_POSITIVE_LIFT = [0,0,POSITIVE_LIFT_VEL,0]
+R4_POSITIVE_LIFT = [0,0,0,POSITIVE_LIFT_VEL]
+
+R1_NEGATIVE_LIFT = [NEGATIVE_LIFT_VEL,0,0,0]
+R2_NEGATIVE_LIFT = [0,NEGATIVE_LIFT_VEL,0,0]
+R3_NEGATIVE_LIFT = [0,0,NEGATIVE_LIFT_VEL,0]
+R4_NEGATIVE_LIFT = [0,0,0,NEGATIVE_LIFT_VEL]
+
+VELOCITY_CHOICES = [
+    ALL_NEGATIVE_LIFT, 
+    ALL_POSITIVE_LIFT, 
+    R1_POSITIVE_LIFT, 
+    R2_POSITIVE_LIFT, 
+    R3_POSITIVE_LIFT, 
+    R4_POSITIVE_LIFT,
+    R1_NEGATIVE_LIFT,
+    R2_NEGATIVE_LIFT,
+    R3_NEGATIVE_LIFT,
+    R4_NEGATIVE_LIFT
+]
+
 def simapp_shutdown():
     #This function is called on simapp exit. This is called on:
     #  -robomaker expiry shutdown
@@ -96,7 +126,8 @@ class DeepRotorEnv(gym.Env):
                                             shape=(TRAINING_IMAGE_SIZE[1], TRAINING_IMAGE_SIZE[0], 3),
                                             dtype=np.uint8)
         # Create the action space
-        self.action_space = spaces.Box(low=np.array([-1, -1, -1, -1]), high=np.array([+1, +1, +1, +1]), dtype=np.float32)
+        #self.action_space = spaces.Box(low=np.array([-1, -1, -1, -1]), high=np.array([+1, +1, +1, +1]), dtype=np.float32)
+        self.action_space =  spaces.Discrete(len(VELOCITY_CHOICES))
 
         if node_type == SIMULATION_WORKER:
 
@@ -263,7 +294,7 @@ class DeepRotorEnv(gym.Env):
         self.done = False
 
         # Send this action to Gazebo and increment the step count
-        self.velocities = action
+        self.velocities = VELOCITY_CHOICES[action]
         if self.allow_servo_step_signals:
             self.send_action(self.velocities)
         self.steps += 1
