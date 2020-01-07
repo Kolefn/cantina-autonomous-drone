@@ -176,6 +176,7 @@ class DoorMan:
         logger.info ("DoorMan: installing SIGINT, SIGTERM")
         signal.signal(signal.SIGINT, self.exit_gracefully)
         signal.signal(signal.SIGTERM, self.exit_gracefully)
+        logger.info("DoorMan: done installing")
 
     def exit_gracefully(self, signum, frame):
         self.terminate_now = True
