@@ -113,7 +113,8 @@ def get_ip_from_host(timeout=100):
 def write_frozen_graph(graph_manager):
     if not os.path.exists(SM_MODEL_OUTPUT_DIR):
         os.makedirs(SM_MODEL_OUTPUT_DIR)
-    output_head = ['main_level/agent/main/online/network_1/ppo_head_0/policy']
+    print([node.name for node in graph_manager.sess.graph_def.node])
+    output_head = ['main_level/agent/main/online/network_1/ppo_head_0/policy:0']
     frozen = tf.graph_util.convert_variables_to_constants(graph_manager.sess, graph_manager.sess.graph_def, output_head)
     tf.train.write_graph(frozen, SM_MODEL_OUTPUT_DIR, 'model.pb', as_text=False)
 
