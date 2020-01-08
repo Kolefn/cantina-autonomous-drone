@@ -112,10 +112,12 @@ def training_worker(graph_manager, checkpoint_dir, use_pretrained_model, framewo
 
                 steps += 1
 
+                logger.info("begin_training")
                 graph_manager.phase = RunPhase.TRAIN
                 graph_manager.train()
                 graph_manager.phase = RunPhase.UNDEFINED
-
+                logger.info("finish_training")
+                
                 # Check for Nan's in all agents
                 rollout_has_nan = False
                 for level in graph_manager.level_managers:

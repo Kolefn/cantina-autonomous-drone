@@ -234,6 +234,7 @@ class DeepRotorEnv(gym.Env):
             self.simtrace_data = DeepRotorSimTraceData(self.simtrace_s3_bucket, self.simtrace_s3_key)
 
     def reset(self):
+        logger.info ("reset")
         if node_type == SAGEMAKER_TRAINING_WORKER:
             return self.observation_space.sample()
 
@@ -262,6 +263,7 @@ class DeepRotorEnv(gym.Env):
         return self.next_state
 
     def set_next_state(self):
+        logger.info ("set_next_state")
         # Make sure the first image is the starting image
         image_data = self.image_queue.get(block=True, timeout=None)
         # Read the image and resize to get the state
@@ -270,6 +272,7 @@ class DeepRotorEnv(gym.Env):
         self.next_state = np.array(image)
 
     def drone_reset(self):
+        logger.info ("drone_reset")
         try:
             self.reset_drone_client(self.start_x, self.start_y, self.start_z)
             # First clear the queue so that we set the state to the start image
@@ -318,6 +321,7 @@ class DeepRotorEnv(gym.Env):
         self.velocity_pub.publish(msg)
 
     def infer_reward_state(self, velocities):
+        logger.info ("infer_reward_state")
         try:
             self.set_next_state()
         except Exception as ex:
@@ -349,6 +353,7 @@ class DeepRotorEnv(gym.Env):
         # Compute the reward
         reward = 0.0
         if not model_crashed:
+            logger.info ("model_not_crashed")
             done = False
             target_state = self.get_model_state('target', '')
             params = {
@@ -372,6 +377,7 @@ class DeepRotorEnv(gym.Env):
                 traceback.print_exc()
                 utils.simapp_exit_gracefully()
         else:
+            logger.info ("model_crashed")
             done = True
             reward = CRASHED_REWARD
 
@@ -438,12 +444,14 @@ class DeepRotorEnv(gym.Env):
             self.finish_episode(reward)
 
     def stop_drone(self):
+        logger.info ("stop_drone")
         self.velocities = [0,0,0,0]
         self.action_taken = [0,0,0,0]
         self.send_action(self.velocities)
         self.drone_reset()
 
     def finish_episode(self, reward):
+        logger.info ("finish_episode")
         # Increment episode count, update start position
         self.episodes += 1
         if self.change_start:
