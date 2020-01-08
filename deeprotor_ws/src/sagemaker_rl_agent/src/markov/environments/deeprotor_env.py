@@ -264,7 +264,7 @@ class DeepRotorEnv(gym.Env):
         self.drone_reset()
         self.steps = 0
         self.simulation_start_time = time.time()
-        self.infer_reward_state(self.action_taken)
+        self.infer_reward_state(self.velocities)
 
         return self.next_state
 
