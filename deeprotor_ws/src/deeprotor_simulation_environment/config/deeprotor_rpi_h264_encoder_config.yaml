@@ -2,7 +2,7 @@
 
 # The name of the topic to which the H264 encoder node should subscribe to obtain the feed desired to be encoded
 # The topic must be a sensor_msgs/Image message
-subscription_topic: "/camera/zed/rgb/image_rect_color"
+subscription_topic: "/drone/camera/zed/rgb/image_rect_color"
 
 # The name of the topic to which H264 encoder node should publish the encoded video stream
 # The topic will be a kinesis_video_msgs/KinesisVideoFrame message
