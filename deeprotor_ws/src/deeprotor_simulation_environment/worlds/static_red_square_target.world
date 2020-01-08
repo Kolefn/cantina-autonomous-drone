@@ -9,12 +9,11 @@
     <include>
       <uri>model://sun</uri>
     </include>
-    <model name="target">
-      <include>
+    <include>
         <uri>model://red_square</uri>
         <pose>-1.5 1.5 0.25 -80 0 1 </pose>
+        <name>target</name>
       </include>
-    </model>
     <physics type='ode'>
       <ode>
         <solver>
