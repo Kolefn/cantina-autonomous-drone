@@ -178,6 +178,8 @@ class DeepRotorEnv(gym.Env):
             self.image_queue = queue.Queue(IMG_QUEUE_BUF_SIZE)
             rospy.Subscriber('/camera/zed/rgb/image_rect_color', sensor_image, self.callback_image)
 
+            [print(topic_description[0]) for topic_description in rospy.get_published_topics()]
+
             # Initialize state data
             self.episodes = 0
             self.start_x = 0.0
