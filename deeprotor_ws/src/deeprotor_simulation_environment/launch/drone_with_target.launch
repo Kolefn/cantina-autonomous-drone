@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="world_name" default="$(find deeprotor_simulation_environment)/worlds/static_red_square_target.world"/>
+  <arg name="world_name" default="static_red_square_target"/>
   <arg name="kinesis_video_stream_name" />
   <arg name="kinesis_video_stream_region" default="us-east-1" />
 
   <include file="$(find deeprotor_simulation_environment)/launch/drone.launch">
-    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="world_name" value="$(find deeprotor_simulation_environment)/worlds/$(arg world_name).world"/>
     <arg name="kinesis_video_stream_name" value="$(arg kinesis_video_stream_name)"/>
     <arg name="kinesis_video_stream_region" value="$(arg kinesis_video_stream_region)"/>
   </include>
