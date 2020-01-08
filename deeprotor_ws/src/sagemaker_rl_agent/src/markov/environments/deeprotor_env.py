@@ -348,10 +348,10 @@ class DeepRotorEnv(gym.Env):
         rotor_state_3 = self.get_link_state('drone::rotor_2', '')
         rotor_state_4 = self.get_link_state('drone::rotor_3', '')
         
-        model_crashed = model_y < 0 or  rotor_state_1.pose.position.y <= 0 or \
-                                        rotor_state_2.pose.position.y <= 0 or \
-                                        rotor_state_3.pose.position.y <= 0 or \
-                                        rotor_state_4.pose.position.y <= 0
+        model_crashed = model_y < 0 or  rotor_state_1.link_state.pose.position.y <= 0 or \
+                                        rotor_state_2.link_state.pose.position.y <= 0 or \
+                                        rotor_state_3.link_state.pose.position.y <= 0 or \
+                                        rotor_state_4.link_state.pose.position.y <= 0
 
         # Compute the reward
         reward = 0.0
