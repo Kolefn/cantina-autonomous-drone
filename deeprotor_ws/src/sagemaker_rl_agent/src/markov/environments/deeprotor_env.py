@@ -302,10 +302,11 @@ class DeepRotorEnv(gym.Env):
         self.reward = None
         self.done = False
 
-        # Send this action to Gazebo and increment the step count
         self.velocities = VELOCITY_CHOICES[action]
+
+        # Send this action to Gazebo and increment the step count
         if self.allow_servo_step_signals:
-            self.send_action(self.velocities)
+            self.send_action(self.action)
         self.steps += 1
 
         # Compute the next state and reward
@@ -453,7 +454,7 @@ class DeepRotorEnv(gym.Env):
         logger.info ("stop_drone")
         self.action_taken = 0
         self.velocities = VELOCITY_CHOICES[self.action_taken]
-        self.send_action(self.velocities)
+        self.send_action(self.action_taken)
         self.drone_reset()
 
     def finish_episode(self, reward):
