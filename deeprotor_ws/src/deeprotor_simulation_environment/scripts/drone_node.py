@@ -49,8 +49,11 @@ class DeepRotor(object):
             # Therefore, we add an timer to prevent the log from getting spammed with
             # errors
             time.sleep(WAIT_TO_PREVENT_SPAM)
-            model = get_model_client('drone', '')
-            wait_for_model = not model.success
+            self.model = get_model_client('drone', '')
+            wait_for_model = not self.model.success
+        
+        self.starting_pose = self.model.pose 
+        self.starting_twist = self.model.twist
 
         self.resetdrone_service = rospy.Service(RESET_DRONE_SRV_NAME, ResetDroneSrv,
                                               self.handle_reset_drone)
@@ -63,24 +66,14 @@ class DeepRotor(object):
         ''' Reset's the drone
         '''
 
-        start_quaternion = Rotation.from_euler('zyx', [0, 0, 0]).as_quat()
-
         # Construct the model state and send to Gazebo
         model_state = ModelState()
         model_state.model_name = 'drone'
+        model_state.pose = self.starting_pose
         model_state.pose.position.x = x
         model_state.pose.position.y = y
         model_state.pose.position.z = z
-        model_state.pose.orientation.x = start_quaternion[0]
-        model_state.pose.orientation.y = start_quaternion[1]
-        model_state.pose.orientation.z = start_quaternion[2]
-        model_state.pose.orientation.w = start_quaternion[3]
-        model_state.twist.linear.x = 0
-        model_state.twist.linear.y = 0
-        model_state.twist.linear.z = 0
-        model_state.twist.angular.x = 0
-        model_state.twist.angular.y = 0
-        model_state.twist.angular.z = 0
+        model_state.twist = self.starting_twist
         self.model_state_client(model_state)
 
     def handle_reset_drone(self, req):
