@@ -404,7 +404,7 @@ class DeepRotorEnv(gym.Env):
 
         # Trace logs to help us debug and visualize the training runs
         # btown TODO: This should be written to S3, not to CWL.
-        logger.info('SIM_TRACE_LOG:%d,%d,%.4f,%.4f,%.4f,%.2f,%.2f,%d,%.4f,%s,%s,%.4f,%d,%.2f,%s\n' % (
+        logger.info('SIM_TRACE_LOG:{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}\n'.format(
             self.episodes, 
             self.steps, 
             model_x, 
