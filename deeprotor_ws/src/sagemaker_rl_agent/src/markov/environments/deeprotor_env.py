@@ -176,9 +176,10 @@ class DeepRotorEnv(gym.Env):
 
             # Queue used to maintain image consumption synchronicity
             self.image_queue = queue.Queue(IMG_QUEUE_BUF_SIZE)
-            rospy.Subscriber('/camera/zed/rgb/image_rect_color', sensor_image, self.callback_image)
+            
+            rospy.Subscriber('/drone/camera/zed/rgb/image_rect_color', sensor_image, self.callback_image)
 
-            [print(topic_description[0]) for topic_description in rospy.get_published_topics()]
+            # [print(topic_description[0]) for topic_description in rospy.get_published_topics()]
 
             # Initialize state data
             self.episodes = 0
