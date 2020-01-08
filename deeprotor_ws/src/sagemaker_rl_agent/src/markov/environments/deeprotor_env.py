@@ -463,7 +463,7 @@ class DeepRotorEnv(gym.Env):
         if self.change_start:
             # move drone progressively side to side, up and down, back and forth
             self.start_x = math.cos((self.start_x + ROUND_ROBIN_ADVANCE_DIST) % 1.0)
-            self.start_y = start_y #(self.start_y + ROUND_ROBIN_ADVANCE_DIST) % 1.0
+            self.start_y = self.start_y #(self.start_y + ROUND_ROBIN_ADVANCE_DIST) % 1.0
             self.start_z = math.sin((self.start_z + ROUND_ROBIN_ADVANCE_DIST) % 1.0)
         # Reset the drone
         self.stop_drone()
