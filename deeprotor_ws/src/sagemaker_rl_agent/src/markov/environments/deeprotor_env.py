@@ -71,6 +71,8 @@ simapp_data_upload_timer = None
 POSITIVE_LIFT_VEL = 500
 NEGATIVE_LIFT_VEL = -POSITIVE_LIFT_VEL
 
+NO_LIFT = [0,0,0,0]
+
 ALL_NEGATIVE_LIFT = [NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL]
 
 ALL_POSITIVE_LIFT = [POSITIVE_LIFT_VEL,POSITIVE_LIFT_VEL,POSITIVE_LIFT_VEL,POSITIVE_LIFT_VEL]
@@ -86,16 +88,17 @@ R3_NEGATIVE_LIFT = [0,0,NEGATIVE_LIFT_VEL,0]
 R4_NEGATIVE_LIFT = [0,0,0,NEGATIVE_LIFT_VEL]
 
 VELOCITY_CHOICES = [
-    ALL_NEGATIVE_LIFT, 
+    NO_LIFT,
+    #  ALL_NEGATIVE_LIFT, 
     ALL_POSITIVE_LIFT, 
     R1_POSITIVE_LIFT, 
     R2_POSITIVE_LIFT, 
     R3_POSITIVE_LIFT, 
     R4_POSITIVE_LIFT,
-    R1_NEGATIVE_LIFT,
-    R2_NEGATIVE_LIFT,
-    R3_NEGATIVE_LIFT,
-    R4_NEGATIVE_LIFT
+    # R1_NEGATIVE_LIFT,
+    # R2_NEGATIVE_LIFT,
+    # R3_NEGATIVE_LIFT,
+    # R4_NEGATIVE_LIFT
 ]
 
 def simapp_shutdown():
@@ -189,7 +192,7 @@ class DeepRotorEnv(gym.Env):
             self.change_start = rospy.get_param('CHANGE_START_POSITION', (self.job_type == TRAINING_JOB))
             self.is_simulation_done = False
             self.velocities = [0,0,0,0]
-            self.action_taken = [0,0,0,0]
+            self.action_taken = 0
             self.next_state = None
             self.reward = None
             self.reward_in_episode = 0
@@ -249,7 +252,7 @@ class DeepRotorEnv(gym.Env):
 
         self.velocities = [0,0,0,0]
         self.previous_position = [0,0,0]
-        self.action_taken = [0,0,0,0]
+        self.action_taken = 0
         self.next_state = None
         self.reward = None
         self.reward_in_episode = 0
@@ -318,9 +321,9 @@ class DeepRotorEnv(gym.Env):
             utils.json_format_logger("Error retrieving frame from gazebo: {}".format(ex),
                        **utils.build_system_error_dict(utils.SIMAPP_ENVIRONMENT_EXCEPTION, utils.SIMAPP_EVENT_ERROR_CODE_500))
 
-    def send_action(self, velocities):
+    def send_action(self, action):
         msg = Actuators()
-        msg.angular_velocities = velocities
+        msg.angular_velocities = VELOCITY_CHOICES[action]
         self.velocity_pub.publish(msg)
 
     def infer_reward_state(self, velocities):
@@ -448,8 +451,8 @@ class DeepRotorEnv(gym.Env):
 
     def stop_drone(self):
         logger.info ("stop_drone")
-        self.velocities = [0,0,0,0]
-        self.action_taken = [0,0,0,0]
+        self.action_taken = 0
+        self.velocities = VELOCITY_CHOICES[self.action_taken]
         self.send_action(self.velocities)
         self.drone_reset()
 
@@ -460,7 +463,7 @@ class DeepRotorEnv(gym.Env):
         if self.change_start:
             # move drone progressively side to side, up and down, back and forth
             self.start_x = math.cos((self.start_x + ROUND_ROBIN_ADVANCE_DIST) % 1.0)
-            self.start_y = (self.start_y + ROUND_ROBIN_ADVANCE_DIST) % 1.0
+            self.start_y = start_y #(self.start_y + ROUND_ROBIN_ADVANCE_DIST) % 1.0
             self.start_z = math.sin((self.start_z + ROUND_ROBIN_ADVANCE_DIST) % 1.0)
         # Reset the drone
         self.stop_drone()
