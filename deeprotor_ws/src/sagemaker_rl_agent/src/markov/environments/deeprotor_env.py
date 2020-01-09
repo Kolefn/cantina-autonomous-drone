@@ -306,7 +306,7 @@ class DeepRotorEnv(gym.Env):
 
         # Send this action to Gazebo and increment the step count
         if self.allow_servo_step_signals:
-            self.send_action(self.action)
+            self.send_action(action)
         self.steps += 1
 
         # Compute the next state and reward
