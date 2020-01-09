@@ -5,17 +5,17 @@
   <link name="zed_camera_link">
     <inertial>
       <mass value="1e-3" />
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0.02 0" rpy="0 0 0"/>
       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0.02 0" rpy="0 0 0"/>
       <geometry>
         <box size="0.01 0.05 0.015"/>
       </geometry>
     </collision>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0.02 0" rpy="0 0 0"/>
       <geometry>
         <box size="0.01 0.05 0.015"/>
       </geometry>
@@ -24,7 +24,7 @@
   </link>
 
   <joint name="zed_camera_joint" type="fixed">
-    <origin xyz="0.0 0.0 -0.08" rpy="0.0 0.1 2.3" />
+    <origin xyz="0.0 0.02 -0.08" rpy="0.0 0.1 2.3" />
     <parent link="drone/base_link"/>
     <child link="zed_camera_link"/>
     <axis xyz="0 0 1" />
@@ -37,13 +37,13 @@
   <link name="camera_link"><!-- this needs to match the name in zed_wrapper/zed_tf.launch -->
     <inertial>
       <mass value="1e-3" />
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0.02 0" rpy="0 0 0"/>
       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
   </link>
 
   <joint name="zed_camera_left_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0.02 0" rpy="0 0 0"/>
     <parent link="zed_camera_link"/>
     <child link="camera_link"/>
     <axis xyz="0 0 1" />
