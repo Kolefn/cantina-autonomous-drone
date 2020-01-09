@@ -72,6 +72,7 @@ POSITIVE_LIFT_VEL = 500
 NEGATIVE_LIFT_VEL = -POSITIVE_LIFT_VEL
 
 NO_LIFT = [0,0,0,0]
+HALF_LIFT = [POSITIVE_LIFT_VEL/2, POSITIVE_LIFT_VEL/2, POSITIVE_LIFT_VEL/2, POSITIVE_LIFT_VEL/2]
 
 ALL_NEGATIVE_LIFT = [NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL]
 
@@ -88,7 +89,7 @@ R3_NEGATIVE_LIFT = [0,0,NEGATIVE_LIFT_VEL,0]
 R4_NEGATIVE_LIFT = [0,0,0,NEGATIVE_LIFT_VEL]
 
 VELOCITY_CHOICES = [
-    NO_LIFT,
+    HALF_LIFT,
     #  ALL_NEGATIVE_LIFT, 
     ALL_POSITIVE_LIFT, 
     R1_POSITIVE_LIFT, 
@@ -344,10 +345,10 @@ class DeepRotorEnv(gym.Env):
         model_y = model_state.pose.position.y
         model_z = model_state.pose.position.z
 
-        rotor_state_1 = self.get_model_state('drone::rotor_0', '')
-        rotor_state_2 = self.get_model_state('drone::rotor_1', '')
-        rotor_state_3 = self.get_model_state('drone::rotor_2', '')
-        rotor_state_4 = self.get_model_state('drone::rotor_3', '')
+        # rotor_state_1 = self.get_model_state('drone::rotor_0', '')
+        # rotor_state_2 = self.get_model_state('drone::rotor_1', '')
+        # rotor_state_3 = self.get_model_state('drone::rotor_2', '')
+        # rotor_state_4 = self.get_model_state('drone::rotor_3', '')
         
         # model_crashed = rotor_state_1.pose.position.z <= 0 or \
         #                 rotor_state_2.pose.position.z <= 0 or \
