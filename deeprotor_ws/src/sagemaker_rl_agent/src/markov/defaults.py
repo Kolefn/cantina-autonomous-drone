@@ -19,13 +19,15 @@ def reward_function(params):
     y = params['y']
     z = params['z']
 
-    dx = x - target_x
-    dy = y - target_y
-    dz = z = target_z
+    dx = target_x - x 
+    dy = target_y - y
+    dz = target_z - z
 
     # rotations needed for drone camera to face target
-    pitch = -math.atan2(dy, math.sqrt(dx*dx + dz*dz))
-    yaw = math.atan2(dz, dx) - 1.5708
+    pitch = math.atan2(dz, math.sqrt(dx*dx + dy*dy))
+
+    starting_offset = math.atan2(-1.5, 1.5) #@TODO dont hardcode the targets x,y here
+    yaw = math.atan2(dy, dx) - starting_offset
 
     # higher reward for less needed rotation
     reward = 1 - ((abs(pitch) + abs(yaw)) / (math.pi*2))
