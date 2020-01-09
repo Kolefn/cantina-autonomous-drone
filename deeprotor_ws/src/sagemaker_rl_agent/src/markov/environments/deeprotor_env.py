@@ -140,15 +140,12 @@ class DeepRotorEnv(gym.Env):
             # wait for required services
             rospy.wait_for_service('/deeprotor_simulation_environment/reset_drone')
             rospy.wait_for_service('/gazebo/get_model_state')
-            rospy.wait_for_service('/gazebo/get_link_state')
 
             self.get_model_state = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
     
             self.reset_drone_client = rospy.ServiceProxy('/deeprotor_simulation_environment/reset_drone',
                                                        ResetDroneSrv)
                                         
-            self.get_link_state = rospy.ServiceProxy('/gazebo/get_link_state', GetLinkState)
-
 
             self.velocity_pub = rospy.Publisher("/drone/command/motor_speed", Actuators, queue_size=1)
 
@@ -347,15 +344,15 @@ class DeepRotorEnv(gym.Env):
         model_y = model_state.pose.position.y
         model_z = model_state.pose.position.z
 
-        rotor_state_1 = self.get_link_state('drone::rotor_0', '')
-        rotor_state_2 = self.get_link_state('drone::rotor_1', '')
-        rotor_state_3 = self.get_link_state('drone::rotor_2', '')
-        rotor_state_4 = self.get_link_state('drone::rotor_3', '')
+        rotor_state_1 = self.get_model_state('rotor_0', '')
+        rotor_state_2 = self.get_model_state('rotor_1', '')
+        rotor_state_3 = self.get_model_state('rotor_2', '')
+        rotor_state_4 = self.get_model_state('rotor_3', '')
         
-        model_crashed = rotor_state_1.link_state.pose.position.z <= 0 or \
-                        rotor_state_2.link_state.pose.position.z <= 0 or \
-                        rotor_state_3.link_state.pose.position.z <= 0 or \
-                        rotor_state_4.link_state.pose.position.z <= 0
+        model_crashed = rotor_state_1.pose.position.z <= 0 or \
+                        rotor_state_2.pose.position.z <= 0 or \
+                        rotor_state_3.pose.position.z <= 0 or \
+                        rotor_state_4.pose.position.z <= 0
 
         # Compute the reward
         reward = 0.0
