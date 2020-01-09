@@ -391,12 +391,13 @@ class DeepRotorEnv(gym.Env):
         # Reset if the drone position hasn't changed in the last 2 steps
         prev_pos_dist = (model_x - self.previous_position[0]) + (model_y - self.previous_position[1]) + (model_z - self.previous_position[2])
 
-        if prev_pos_dist <= 0.0001 and self.steps % NUM_STEPS_TO_CHECK_STUCK == 0:
-            done = True
-            reward = CRASHED_REWARD  # stuck
+        # if prev_pos_dist <= 0.0001 and self.steps % NUM_STEPS_TO_CHECK_STUCK == 0:
+        #     done = True
+        #     reward = CRASHED_REWARD  # stuck
 
         # Simulation jobs are done when max steps reached
         if self.steps >= MAX_NUM_STEPS_PER_JOB:
+            logger.info ("MAX STEPS REACHED")
             done = True
 
         self.previous_position = [model_x, model_y, model_z]
