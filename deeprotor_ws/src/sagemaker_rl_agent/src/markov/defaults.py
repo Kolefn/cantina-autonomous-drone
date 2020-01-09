@@ -28,6 +28,6 @@ def reward_function(params):
     yaw = math.atan2(dz, dx) - 1.5708
 
     # higher reward for less needed rotation
-    reward = 1 - ((math.abs(pitch) + math.abs(yaw)) / (math.pi*2))
+    reward = 1 - ((abs(pitch) + abs(yaw)) / (math.pi*2))
 
     return float(reward)
