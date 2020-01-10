@@ -20,6 +20,8 @@ from gym import spaces
 from PIL import Image
 from markov import utils
 
+from itertools import permutations 
+
 logger = utils.Logger(__name__, logging.INFO).get_logger()
 
 # Type of worker
@@ -69,38 +71,19 @@ SIMAPP_DATA_UPLOAD_TIME_TO_S3 = 60 #in seconds
 simapp_data_upload_timer = None
 
 POSITIVE_LIFT_VEL = 500
-NEGATIVE_LIFT_VEL = -POSITIVE_LIFT_VEL
-
 NO_LIFT = [0,0,0,0]
-HALF_LIFT = [POSITIVE_LIFT_VEL/2, POSITIVE_LIFT_VEL/2, POSITIVE_LIFT_VEL/2, POSITIVE_LIFT_VEL/2]
 
-ALL_NEGATIVE_LIFT = [NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL,NEGATIVE_LIFT_VEL]
+VELOCITY_RANGE_MIN = POSITIVE_LIFT_VEL-100
+VELOCITY_RANGE_MAX = POSITIVE_LIFT_VEL+100
 
-ALL_POSITIVE_LIFT = [POSITIVE_LIFT_VEL,POSITIVE_LIFT_VEL,POSITIVE_LIFT_VEL,POSITIVE_LIFT_VEL]
+VELOCITY_VALUE_INCREMENT = 50
+VELOCITY_VALUES = []
+for i in range(0, VELOCITY_RANGE_MAX - VELOCITY_RANGE_MIN + 1, VELOCITY_VALUE_INCREMENT):
+    VELOCITY_VALUES.append(VELOCITY_RANGE_MIN+i)
 
-R1_POSITIVE_LIFT = [POSITIVE_LIFT_VEL,0,0,0]
-R2_POSITIVE_LIFT = [0,POSITIVE_LIFT_VEL,0,0]
-R3_POSITIVE_LIFT = [0,0,POSITIVE_LIFT_VEL,0]
-R4_POSITIVE_LIFT = [0,0,0,POSITIVE_LIFT_VEL]
-
-R1_NEGATIVE_LIFT = [NEGATIVE_LIFT_VEL,0,0,0]
-R2_NEGATIVE_LIFT = [0,NEGATIVE_LIFT_VEL,0,0]
-R3_NEGATIVE_LIFT = [0,0,NEGATIVE_LIFT_VEL,0]
-R4_NEGATIVE_LIFT = [0,0,0,NEGATIVE_LIFT_VEL]
-
-VELOCITY_CHOICES = [
-    HALF_LIFT,
-    #  ALL_NEGATIVE_LIFT, 
-    ALL_POSITIVE_LIFT, 
-    R1_POSITIVE_LIFT, 
-    R2_POSITIVE_LIFT, 
-    R3_POSITIVE_LIFT, 
-    R4_POSITIVE_LIFT,
-    # R1_NEGATIVE_LIFT,
-    # R2_NEGATIVE_LIFT,
-    # R3_NEGATIVE_LIFT,
-    # R4_NEGATIVE_LIFT
-]
+VELOCITY_SETS = []
+                    
+VELOCITY_SETS = [list(item) for item in permutations(VELOCITY_VALUES, 4)]
 
 def simapp_shutdown():
     #This function is called on simapp exit. This is called on:
@@ -131,7 +114,7 @@ class DeepRotorEnv(gym.Env):
                                             dtype=np.uint8)
         # Create the action space
         #self.action_space = spaces.Box(low=np.array([-1, -1, -1, -1]), high=np.array([+1, +1, +1, +1]), dtype=np.float32)
-        self.action_space =  spaces.Discrete(len(VELOCITY_CHOICES))
+        self.action_space =  spaces.Discrete(len(VELOCITY_SETS))
 
         if node_type == SIMULATION_WORKER:
 
@@ -299,8 +282,9 @@ class DeepRotorEnv(gym.Env):
         self.next_state = None
         self.reward = None
         self.done = False
+        self.action_taken = action
 
-        self.velocities = VELOCITY_CHOICES[action]
+        self.velocities = VELOCITY_SETS[action]
 
         # Send this action to Gazebo and increment the step count
         if self.allow_servo_step_signals:
@@ -322,7 +306,7 @@ class DeepRotorEnv(gym.Env):
 
     def send_action(self, action):
         msg = Actuators()
-        msg.angular_velocities = VELOCITY_CHOICES[action]
+        msg.angular_velocities = VELOCITY_SETS[action]
         self.velocity_pub.publish(msg)
 
     def infer_reward_state(self, velocities):
@@ -454,7 +438,7 @@ class DeepRotorEnv(gym.Env):
     def stop_drone(self):
         logger.info ("stop_drone")
         self.action_taken = 0
-        self.velocities = VELOCITY_CHOICES[self.action_taken]
+        self.velocities = NO_LIFT
         self.send_action(self.action_taken)
         self.drone_reset()
 
