@@ -10,10 +10,13 @@
       <uri>model://sun</uri>
     </include>
     <include>
-        <uri>model://models/red_square</uri>
-        <pose>-1.5 1.5 0.25 -80 0 1 </pose>
-        <name>target</name>
-      </include>
+      <uri>model://models/red_square</uri>
+      <pose>-1.5 1.5 0.25 -80 0 1 </pose>
+      <name>target</name>
+    </include>
+    
+    <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/>
+
     <physics type='ode'>
       <ode>
         <solver>
