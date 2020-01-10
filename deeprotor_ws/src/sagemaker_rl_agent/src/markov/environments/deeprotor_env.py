@@ -131,7 +131,7 @@ class DeepRotorEnv(gym.Env):
                                                        ResetDroneSrv)
                                         
 
-            self.velocity_pub = rospy.Publisher("/drone/command/motor_speed", Actuators, queue_size=10)
+            self.velocity_pub = rospy.Publisher("/drone/command/motor_speed", Actuators)
 
             # Read in parameters
             self.job_type = rospy.get_param('JOB_TYPE')
@@ -288,6 +288,7 @@ class DeepRotorEnv(gym.Env):
 
         # Send this action to Gazebo and increment the step count
         if self.allow_servo_step_signals:
+            logger.info ("sending step action")
             self.send_action(action)
         self.steps += 1
 
