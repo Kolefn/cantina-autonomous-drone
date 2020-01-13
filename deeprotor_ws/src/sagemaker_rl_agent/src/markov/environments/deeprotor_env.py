@@ -84,6 +84,10 @@ VELOCITY_SETS = []
                     
 VELOCITY_SETS = [list(item) for item in product(VELOCITY_VALUES, repeat=4)]
 
+WORLD_BOUND_X = 15
+WORLD_BOUND_Y = 15
+WORLD_BOUND_Z = 15
+
 def simapp_shutdown():
     #This function is called on simapp exit. This is called on:
     #  -robomaker expiry shutdown
@@ -335,7 +339,8 @@ class DeepRotorEnv(gym.Env):
         #                 rotor_state_4.pose.position.z <= 0
 
         model_flipped = abs(model_orientation[1]) >= 2.0 or abs(model_orientation[2]) >= 2.0
-        model_crashed = model_flipped
+        model_out_of_bound = (abs(model_x) >= WORLD_BOUND_X) or (abs(model_y) >= WORLD_BOUND_Y) or (abs(model_z) >= WORLD_BOUND_Z)
+        model_crashed = model_flipped or model_out_of_bound
 
         # Compute the reward
         reward = 0.0
@@ -352,6 +357,9 @@ class DeepRotorEnv(gym.Env):
                 'target_x': target_state.pose.position.x,
                 'target_y': target_state.pose.position.y,
                 'target_z': target_state.pose.position.z,
+                'x_bound': WORLD_BOUND_X,
+                'y_bound': WORLD_BOUND_Y,
+                'z_bound': WORLD_BOUND_Z,
                 'steps': self.steps,
             }
             try:
