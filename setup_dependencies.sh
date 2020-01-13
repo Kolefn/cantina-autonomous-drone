@@ -16,7 +16,7 @@ sudo apt-get install libignition-math2-dev
 sed -i 's/msg.twist_covariance/msg.velocity_covariance/g' deeprotor_ws/src/mavros/mavros_extras/src/plugins/odom.cpp
 
 # patch rotors_gazebo_plugins build so libmav_msgs.so is available to the librotors_gazebo_ros_interface_plugin
-sed -i '188i list(APPEND targets_to_install mav_msgs)' deeprotor_ws/src/rotors_simulator/rotors_gazebo_plugins/CMakeLists.txt
+sed -i '216i list(APPEND targets_to_install mav_msgs)' deeprotor_ws/src/rotors_simulator/rotors_gazebo_plugins/CMakeLists.txt
 
 # additional deps
 sudo apt-get install ros-kinetic-ros-control ros-kinetic-ros-controllers
