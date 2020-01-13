@@ -28,11 +28,13 @@ def reward_function(params):
 
     xymag = math.sqrt(dx*dx + dy*dy)
 
+    ONE_TURN = math.pi*2
+
     # rotations needed for drone camera to face target
-    pitch = math.atan2(dz, xymag) - current_pitch
+    pitch = (math.atan2(dz, xymag) - current_pitch) % ONE_TURN
 
     starting_yaw_offset = math.atan2(-1.5, 1.5) #@TODO dont hardcode the targets x,y here
-    yaw = math.atan2(dy, dx) - starting_yaw_offset - current_yaw
+    yaw = (math.atan2(dy, dx) - starting_yaw_offset - current_yaw) % ONE_TURN
 
     # we want the drone to maintain a close position to the target
     # note xymag cannot be negative because it is the sqrt of a positive
@@ -42,7 +44,7 @@ def reward_function(params):
     dist_factor = abs(ideal_dist - xymag) / max_dist
 
     # a normalized (0, 1) value representing the amount of rotation needed
-    rot_factor = ((abs(pitch) + abs(yaw)) / (math.pi*2))
+    rot_factor = ((abs(pitch) + abs(yaw)) / (ONE_TURN*2))
 
     # higher reward for factors closer to zero
     reward = 1 - dist_factor - rot_factor
