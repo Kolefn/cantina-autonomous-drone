@@ -220,7 +220,6 @@ class DeepRotorEnv(gym.Env):
             self.simtrace_data = DeepRotorSimTraceData(self.simtrace_s3_bucket, self.simtrace_s3_key)
 
     def reset(self):
-        logger.info ("reset")
         if node_type == SAGEMAKER_TRAINING_WORKER:
             return self.observation_space.sample()
 
@@ -249,7 +248,6 @@ class DeepRotorEnv(gym.Env):
         return self.next_state
 
     def set_next_state(self):
-        logger.info ("set_next_state")
         # Make sure the first image is the starting image
         image_data = self.image_queue.get(block=True, timeout=None)
         # Read the image and resize to get the state
@@ -258,7 +256,6 @@ class DeepRotorEnv(gym.Env):
         self.next_state = np.array(image)
 
     def drone_reset(self):
-        logger.info ("drone_reset")
         try:
             self.reset_drone_client(self.start_x, self.start_y, self.start_z)
             # First clear the queue so that we set the state to the start image
@@ -287,7 +284,6 @@ class DeepRotorEnv(gym.Env):
 
         # Send this action to Gazebo and increment the step count
         if self.allow_servo_step_signals:
-            logger.info ("sending step action")
             self.send_action(action)
         self.steps += 1
 
@@ -310,7 +306,6 @@ class DeepRotorEnv(gym.Env):
         self.velocity_pub.publish(msg)
 
     def infer_reward_state(self, velocities):
-        logger.info ("infer_reward_state")
         try:
             self.set_next_state()
         except Exception as ex:
@@ -323,7 +318,7 @@ class DeepRotorEnv(gym.Env):
             model_state.pose.orientation.x,
             model_state.pose.orientation.y,
             model_state.pose.orientation.z,
-            model_state.pose.orientation.w]).as_euler('zyx')
+            model_state.pose.orientation.w]).as_euler('xyz')
 
         model_x = model_state.pose.position.x
         model_y = model_state.pose.position.y
@@ -339,21 +334,21 @@ class DeepRotorEnv(gym.Env):
         #                 rotor_state_3.pose.position.z <= 0 or \
         #                 rotor_state_4.pose.position.z <= 0
 
-        model_crashed = False
+        model_flipped = abs(model_orientation[0]) > 2 or abs(model_orientation[1]) > 2
+        model_crashed = model_flipped
 
         # Compute the reward
         reward = 0.0
         if not model_crashed:
-            logger.info ("model_not_crashed")
             done = False
             target_state = self.get_model_state('target', '')
             params = {
                 'x': model_x,
                 'y': model_y,
                 'z': model_z,
-                'pitch': model_orientation[0],
-                'yaw': model_orientation[1],
-                'roll': model_orientation[2],
+                'roll': model_orientation[0],
+                'pitch': model_orientation[1],
+                'yaw': model_orientation[2],
                 'target_x': target_state.pose.position.x,
                 'target_y': target_state.pose.position.y,
                 'target_z': target_state.pose.position.z,
@@ -368,7 +363,6 @@ class DeepRotorEnv(gym.Env):
                 traceback.print_exc()
                 utils.simapp_exit_gracefully()
         else:
-            logger.info ("model_crashed")
             done = True
             reward = CRASHED_REWARD
 
@@ -381,7 +375,6 @@ class DeepRotorEnv(gym.Env):
 
         # Simulation jobs are done when max steps reached
         if self.steps >= MAX_NUM_STEPS_PER_JOB:
-            logger.info ("MAX STEPS REACHED")
             done = True
 
         self.previous_position = [model_x, model_y, model_z]
@@ -393,7 +386,7 @@ class DeepRotorEnv(gym.Env):
 
         # Trace logs to help us debug and visualize the training runs
         # btown TODO: This should be written to S3, not to CWL.
-        logger.info('SIM_TRACE_LOG:{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}\n'.format(
+        logger.info('SIM_TRACE_LOG:ep-{},steps-{},x-{},y-{},z-{},roll-{},pitch-{},yaw-{},v1-{},v2-{},v3-{},v4-{},action-{},reward-{},done-{},time-{}\n'.format(
             self.episodes, 
             self.steps, 
             model_x, 
@@ -418,9 +411,9 @@ class DeepRotorEnv(gym.Env):
         reward_metrics['X'] = model_x
         reward_metrics['Y'] = model_y
         reward_metrics['Z'] = model_z
-        reward_metrics['pitch'] = model_orientation[0]
-        reward_metrics['yaw'] = model_orientation[1]
-        reward_metrics['roll'] = model_orientation[2]
+        reward_metrics['roll'] = model_orientation[0]
+        reward_metrics['pitch'] = model_orientation[1]
+        reward_metrics['yaw'] = model_orientation[2]
         reward_metrics['velocity_rotor_1'] = velocities[0]
         reward_metrics['velocity_rotor_2'] = velocities[1]
         reward_metrics['velocity_rotor_3'] = velocities[2]
@@ -436,14 +429,12 @@ class DeepRotorEnv(gym.Env):
             self.finish_episode(reward)
 
     def stop_drone(self):
-        logger.info ("stop_drone")
         self.action_taken = 0
         self.velocities = NO_LIFT
         self.send_action(self.action_taken)
         self.drone_reset()
 
     def finish_episode(self, reward):
-        logger.info ("finish_episode")
         # Increment episode count, update start position
         self.episodes += 1
         if self.change_start:
