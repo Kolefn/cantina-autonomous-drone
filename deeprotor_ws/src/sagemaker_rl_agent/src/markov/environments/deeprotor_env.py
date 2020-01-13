@@ -20,7 +20,7 @@ from gym import spaces
 from PIL import Image
 from markov import utils
 
-from itertools import permutations 
+from itertools import product 
 
 logger = utils.Logger(__name__, logging.INFO).get_logger()
 
@@ -72,8 +72,8 @@ simapp_data_upload_timer = None
 
 NO_LIFT = [0,0,0,0]
 
-VELOCITY_RANGE_MIN = 440
-VELOCITY_RANGE_MAX = 470
+VELOCITY_RANGE_MIN = 450
+VELOCITY_RANGE_MAX = 460
 
 VELOCITY_VALUE_INCREMENT = 5
 VELOCITY_VALUES = []
@@ -82,7 +82,7 @@ for i in range(0, VELOCITY_RANGE_MAX - VELOCITY_RANGE_MIN + 1, VELOCITY_VALUE_IN
 
 VELOCITY_SETS = []
                     
-VELOCITY_SETS = [list(item) for item in permutations(VELOCITY_VALUES, 4)]
+VELOCITY_SETS = [list(item) for item in product(VELOCITY_VALUES, repeat=4)]
 
 def simapp_shutdown():
     #This function is called on simapp exit. This is called on:
