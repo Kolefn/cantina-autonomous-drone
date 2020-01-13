@@ -318,7 +318,7 @@ class DeepRotorEnv(gym.Env):
             model_state.pose.orientation.x,
             model_state.pose.orientation.y,
             model_state.pose.orientation.z,
-            model_state.pose.orientation.w]).as_euler('xyz')
+            model_state.pose.orientation.w]).as_euler('zyx')
 
         model_x = model_state.pose.position.x
         model_y = model_state.pose.position.y
@@ -334,7 +334,7 @@ class DeepRotorEnv(gym.Env):
         #                 rotor_state_3.pose.position.z <= 0 or \
         #                 rotor_state_4.pose.position.z <= 0
 
-        model_flipped = abs(model_orientation[0]) > 2 or abs(model_orientation[1]) > 2
+        model_flipped = abs(model_orientation[1]) >= 2.0 or abs(model_orientation[2]) >= 2.0
         model_crashed = model_flipped
 
         # Compute the reward
@@ -346,9 +346,9 @@ class DeepRotorEnv(gym.Env):
                 'x': model_x,
                 'y': model_y,
                 'z': model_z,
-                'roll': model_orientation[0],
+                'roll': model_orientation[2],
                 'pitch': model_orientation[1],
-                'yaw': model_orientation[2],
+                'yaw': model_orientation[0],
                 'target_x': target_state.pose.position.x,
                 'target_y': target_state.pose.position.y,
                 'target_z': target_state.pose.position.z,
@@ -392,9 +392,9 @@ class DeepRotorEnv(gym.Env):
             model_x, 
             model_y, 
             model_z,
-            model_orientation[0],
-            model_orientation[1],
             model_orientation[2],
+            model_orientation[1],
+            model_orientation[0],
             velocities[0],
             velocities[1],
             velocities[2],
@@ -411,9 +411,9 @@ class DeepRotorEnv(gym.Env):
         reward_metrics['X'] = model_x
         reward_metrics['Y'] = model_y
         reward_metrics['Z'] = model_z
-        reward_metrics['roll'] = model_orientation[0]
+        reward_metrics['roll'] = model_orientation[2]
         reward_metrics['pitch'] = model_orientation[1]
-        reward_metrics['yaw'] = model_orientation[2]
+        reward_metrics['yaw'] = model_orientation[0]
         reward_metrics['velocity_rotor_1'] = velocities[0]
         reward_metrics['velocity_rotor_2'] = velocities[1]
         reward_metrics['velocity_rotor_3'] = velocities[2]
@@ -440,8 +440,8 @@ class DeepRotorEnv(gym.Env):
         if self.change_start:
             # move drone progressively side to side, up and down, back and forth
             self.start_x = math.cos((self.start_x + ROUND_ROBIN_ADVANCE_DIST) % 1.0)
-            self.start_y = self.start_y #(self.start_y + ROUND_ROBIN_ADVANCE_DIST) % 1.0
-            self.start_z = math.sin((self.start_z + ROUND_ROBIN_ADVANCE_DIST) % 1.0)
+            self.start_y = math.sin((self.start_z + ROUND_ROBIN_ADVANCE_DIST) % 1.0)
+            self.start_z = self.start_z #math.sin((self.start_z + ROUND_ROBIN_ADVANCE_DIST) % 1.0)
         # Reset the drone
         self.stop_drone()
 
