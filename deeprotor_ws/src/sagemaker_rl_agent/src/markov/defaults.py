@@ -19,6 +19,40 @@ def reward_function(params):
     y = params['y']
     z = params['z']
 
+    ideal_x = params['start_x']
+    ideal_y = params['start_y']
+    ideal_z = target_z * 1.5
+
+    x_bound = params['x_bound']
+    y_bound = params['y_bound']
+    z_bound = params['z_bound']
+
+    max_dist_x = -x_bound - abs(ideal_x)
+    max_dist_y = -y_bound - abs(ideal_y)
+    # can only travel along positive z axis
+    max_dist_z = z_bound - ideal_z
+
+    axis_weight = 0.333
+    norm_dist_x = ((ideal_x - x) / max_dist_x) * axis_weight
+    norm_dist_y = ((ideal_y - y) / max_dist_y) * axis_weight
+    norm_dist_z = ((ideal_z - z) / max_dist_z) * axis_weight
+
+    base_reward = 0
+
+    reward = base_reward - norm_dist_x - norm_dist_y - norm_dist_z
+
+    return float(reward)
+
+def target_track_reward_function(params):
+
+    target_x = params['target_x']
+    target_y = params['target_y']
+    target_z = params['target_z']
+
+    x = params['z']
+    y = params['y']
+    z = params['z']
+
     current_pitch = params['pitch']
     current_yaw = params['yaw']
 
