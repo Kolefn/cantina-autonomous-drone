@@ -27,15 +27,15 @@ def reward_function(params):
     y_bound = params['y_bound']
     z_bound = params['z_bound']
 
-    max_dist_x = -x_bound - abs(ideal_x)
-    max_dist_y = -y_bound - abs(ideal_y)
+    max_dist_x = abs(-x_bound - abs(ideal_x))
+    max_dist_y = abs(-y_bound - abs(ideal_y))
     # can only travel along positive z axis
     max_dist_z = z_bound - ideal_z
 
     axis_weight = 0.333
-    norm_dist_x = ((ideal_x - x) / max_dist_x) * axis_weight
-    norm_dist_y = ((ideal_y - y) / max_dist_y) * axis_weight
-    norm_dist_z = ((ideal_z - z) / max_dist_z) * axis_weight
+    norm_dist_x = (abs(ideal_x - x) / max_dist_x) * axis_weight
+    norm_dist_y = (abs(ideal_y - y) / max_dist_y) * axis_weight
+    norm_dist_z = (abs(ideal_z - z) / max_dist_z) * axis_weight
 
     base_reward = 0
 
