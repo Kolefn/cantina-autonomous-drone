@@ -28,7 +28,7 @@ def reward_function(params):
     norm_dist_y = (abs(ideal_y - y) / max_dist_y) * axis_weight
     norm_dist_z = (abs(ideal_z - z) / max_dist_z) * axis_weight
 
-    base_reward = 0
+    base_reward = 1
 
     reward = base_reward - norm_dist_x - norm_dist_y - norm_dist_z
 
