@@ -51,7 +51,7 @@ TRAINING_IMAGE_SIZE = (160, 120)
 ROUND_ROBIN_ADVANCE_DIST = 0.01
 
 # Reward to give the drone when it "crashes"
-CRASHED_REWARD = 1e-8
+CRASHED_REWARD = -1
 
 # Size of the image queue buffer, we want this to be one so that we consume 1 image
 # at a time, but may want to change this as we add more algorithms
