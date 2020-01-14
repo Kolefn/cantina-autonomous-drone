@@ -22,7 +22,11 @@ def reward_function(params):
     # rotations needed for drone camera to face target
     pitch = (math.atan2(dz, math.sqrt(dx*dx + dy*dy)) - current_pitch) % ONE_TURN
 
-    starting_yaw_offset = math.atan2(-1.5, 1.5) #@TODO dont hardcode the targets x,y here
+    # drone starts facing the target in the yaw axis
+    start_dx = target_x - params['start_x']
+    start_dy = target_y - params['start_y']
+    starting_yaw_offset = math.atan2(start_dy, start_dx)
+
     yaw = (math.atan2(dy, dx) - starting_yaw_offset - current_yaw) % ONE_TURN
 
     # we want the drone to maintain a close position to the target
