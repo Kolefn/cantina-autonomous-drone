@@ -15,7 +15,7 @@ def reward_function(params):
     target_y = params['target_y']
     target_z = params['target_z']
 
-    x = params['z']
+    x = params['x']
     y = params['y']
     z = params['z']
 
@@ -51,7 +51,7 @@ def target_track_reward_function(params):
     target_y = params['target_y']
     target_z = params['target_z']
 
-    x = params['z']
+    x = params['x']
     y = params['y']
     z = params['z']
 
