@@ -1,5 +1,8 @@
 import math
 
+def exp_decay(x):
+    return 0.1 ** (2x)
+
 def reward_function(params):
 
     target_x = params['target_x']
@@ -28,9 +31,9 @@ def reward_function(params):
     norm_dist_z = (abs(ideal_z - z) / max_dist_z)
 
     axis_weight = 0.333
-    factor_x = (1 - norm_dist_x) * 0.333
-    factor_y = (1 - norm_dist_y) * 0.333
-    factor_z = (1 - norm_dist_z) * 0.333
+    factor_x = exp_decay(norm_dist_x) * axis_weight
+    factor_y = exp_decay(norm_dist_y) * axis_weight
+    factor_z = exp_decay(norm_dist_z) * axis_weight
 
     reward = factor_x + factor_y + factor_z
 
