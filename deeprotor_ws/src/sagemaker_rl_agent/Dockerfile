@@ -49,6 +49,7 @@ RUN pip install \
     rospkg==1.1.7 \
     scipy==1.2.2 \
     tensorflow==1.11
+    pyasn1==0.5.0
 
 #Install rl coach
 RUN pip install rl-coach-slim==0.11.1
