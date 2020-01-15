@@ -10,7 +10,7 @@ ENTRY_POINT = 'markov.environments.deeprotor_env:DeepRotorEnv'
 THRESHOLD = 200
 
 def exp_decay(x):
-    return 0.1 ** (2x)
+    return 0.1 ** (2*x)
 
 def reward_function(params):
 

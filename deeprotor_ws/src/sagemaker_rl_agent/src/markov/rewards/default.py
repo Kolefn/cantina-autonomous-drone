@@ -1,7 +1,7 @@
 import math
 
 def exp_decay(x):
-    return 0.1 ** (2x)
+    return 0.1 ** (2*x)
 
 def reward_function(params):
 
