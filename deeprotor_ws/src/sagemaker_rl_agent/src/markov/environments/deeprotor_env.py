@@ -134,7 +134,7 @@ class DeepRotorEnv(gym.Env):
                                                        ResetDroneSrv)
                                         
 
-            self.velocity_pub = rospy.Publisher("/drone/command/motor_speed", Actuators, queue_size=3)
+            self.velocity_pub = rospy.Publisher("/drone/command/motor_speed", Actuators, queue_size=1)
 
             # Read in parameters
             self.job_type = rospy.get_param('JOB_TYPE')
