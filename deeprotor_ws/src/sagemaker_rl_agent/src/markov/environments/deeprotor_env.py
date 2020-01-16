@@ -72,17 +72,17 @@ simapp_data_upload_timer = None
 
 NO_LIFT = [0,0,0,0]
 
-VELOCITY_RANGE_MIN = 450
-VELOCITY_RANGE_MAX = 460
+VELOCITY_RANGE_MIN = 440
+VELOCITY_RANGE_MAX = 465
 
-VELOCITY_VALUE_INCREMENT = 10
+VELOCITY_VALUE_INCREMENT = 1
 VELOCITY_VALUES = []
 for i in range(0, VELOCITY_RANGE_MAX - VELOCITY_RANGE_MIN + 1, VELOCITY_VALUE_INCREMENT):
     VELOCITY_VALUES.append(VELOCITY_RANGE_MIN+i)
 
 VELOCITY_SETS = []
                     
-VELOCITY_SETS = [list(item) for item in product(VELOCITY_VALUES, repeat=4)]
+VELOCITY_SETS = [[value, value, value, value] for value in VELOCITY_VALUES] #[list(item) for item in product(VELOCITY_VALUES, repeat=4)]
 
 WORLD_BOUND_X = 15
 WORLD_BOUND_Y = 15
