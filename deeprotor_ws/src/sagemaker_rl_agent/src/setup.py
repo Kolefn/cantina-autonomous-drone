@@ -26,7 +26,7 @@ setup(
         'Pillow==6.2.0',
         'matplotlib==2.0.2',
         'pygame==1.9.3',
-        'PyYAML==3.13',
+        'PyYAML==5.1',
         'redis==3.2.1',
         'rospkg==1.1.7',
         'scipy==1.2.2',
