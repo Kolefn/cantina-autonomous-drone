@@ -23,7 +23,7 @@ setup(
         'kubernetes==7.0.0',
         'minio==4.0.5',
         'pandas==0.22.0',
-        'Pillow==6.2.0',
+        'Pillow==8.1.1',
         'matplotlib==2.0.2',
         'pygame==1.9.3',
         'PyYAML==5.1',
